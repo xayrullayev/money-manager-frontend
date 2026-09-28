@@ -15,7 +15,7 @@
   height: 100%;
   background: var(--color-primary-500);
   border-radius: inherit;
-  transition: width var(--transition-normal);
+  transition: width var(--transition-base);
 }
 .default .fill,
 .success .fill {

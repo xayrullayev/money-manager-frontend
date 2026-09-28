@@ -8,6 +8,7 @@ import {
   SignOutIcon,
 } from "../../../app/navIcons";
 import { Bell, Search, Home, Kebab, Receipt, Coins } from "../sguiIcons";
+import { Avatar, Badge, Button, MessageItem, NotificationItem, NotificationPanel } from "../../../shared/ui";
 import styles from "../StyleGuide.module.css";
 
 const cardBox: CSSProperties = {
@@ -16,28 +17,6 @@ const cardBox: CSSProperties = {
   borderRadius: "var(--radius-lg)",
   padding: "var(--space-5)",
 };
-
-function Avatar({ initials, size = 36, tone = "green" }: { initials: string; size?: number; tone?: "green" | "light" }) {
-  return (
-    <span
-      style={{
-        width: size,
-        height: size,
-        borderRadius: "50%",
-        background: tone === "green" ? "var(--color-accent-light)" : "var(--color-primary-50)",
-        color: "var(--color-primary-700)",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontWeight: 700,
-        fontSize: Math.round(size * 0.38),
-        flexShrink: 0,
-      }}
-    >
-      {initials}
-    </span>
-  );
-}
 
 function TrendBadge({ text, up = true }: { text: string; up?: boolean }) {
   return (
@@ -136,7 +115,7 @@ function CardSection() {
               <div style={{ fontWeight: 700, fontSize: "var(--font-size-lg)", margin: "4px 0" }}>The Future of Cryptocurrency Investments</div>
               <div style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-sm)" }}>An in-depth look at the emerging trends and potential pitfalls in the market.</div>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10 }}>
-                <Avatar initials="VR" size={28} /> <span style={{ fontSize: "var(--font-size-sm)", fontWeight: 600 }}>Valentine Roze</span>
+                <Avatar name="Valentine Roze" size={28} decorative /> <span style={{ fontSize: "var(--font-size-sm)", fontWeight: 600 }}>Valentine Roze</span>
               </div>
             </div>
           </div>
@@ -166,7 +145,7 @@ function ItemSection() {
             </span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
               <span style={{ fontWeight: 600, fontSize: "var(--font-size-sm)" }}>Khalil Bhatti</span>
-              <Avatar initials="KB" size={36} />
+              <Avatar name="Khalil Bhatti" size={36} presence="online" decorative />
             </span>
           </span>
         </div>
@@ -180,7 +159,7 @@ function ItemSection() {
             <div style={{ background: "var(--color-accent-light)", color: "var(--color-primary-700)", padding: "10px 14px", borderRadius: "16px 16px 4px 16px" }}>Can I request a late check-out for Room 305?</div>
           </div>
           <div style={{ alignSelf: "flex-start", maxWidth: "70%", display: "flex", gap: 8 }}>
-            <Avatar initials="HM" size={28} />
+            <Avatar name="Helen Martinez" size={28} decorative />
             <div>
               <div style={{ fontSize: "var(--font-size-xs)", color: "var(--color-text-muted)", marginBottom: 4 }}>Name · 9:46 PM</div>
               <div style={{ background: "var(--color-danger-bg)", color: "var(--color-text)", padding: "10px 14px", borderRadius: "16px 16px 16px 4px" }}>Can I request a late check-out for Room 305?</div>
@@ -190,40 +169,75 @@ function ItemSection() {
       </div>
 
       <div className={styles.demoStack}>
-        <span className={styles.demoLabel}>Message list</span>
+        <span className={styles.demoLabel}>Message list (Inbox) — shared/ui MessageItem</span>
         <div style={cardBox}>
-          {[1, 2].map((i) => (
-            <div key={i} style={{ display: "flex", gap: 12, alignItems: "center", padding: "10px 0", borderBottom: i === 1 ? "1px solid var(--color-border)" : "none" }}>
-              <Avatar initials="HM" />
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <strong style={{ fontSize: "var(--font-size-sm)" }}>Helen Martinez</strong>
-                  <span style={{ padding: "1px 8px", borderRadius: "var(--radius-pill)", background: "var(--color-primary-50)", color: "var(--color-primary-600)", fontSize: 11, fontWeight: 700 }}>Trainer</span>
-                </div>
-                <div style={{ color: "var(--color-text-muted)", fontSize: "var(--font-size-sm)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>Just confirming my booking for the Mazda 3 next…</div>
-              </div>
-              <div style={{ textAlign: "right", flexShrink: 0 }}>
-                <div style={{ fontSize: "var(--font-size-xs)", color: "var(--color-text-muted)" }}>09:15 AM</div>
-                <span style={{ display: "inline-flex", minWidth: 18, height: 18, padding: "0 5px", borderRadius: "var(--radius-pill)", background: "var(--color-danger)", color: "#fff", fontSize: 11, fontWeight: 700, alignItems: "center", justifyContent: "center", marginTop: 4 }}>5</span>
-              </div>
-            </div>
-          ))}
+          <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "var(--space-1)" }}>
+            <MessageItem
+              avatar={<Avatar name="Helen Martinez" presence="online" decorative />}
+              name="Helen Martinez"
+              role="Trainer"
+              time="09:15 AM"
+              preview="Just confirming my booking for the Mazda 3 next week — is the morning slot still open?"
+              unreadCount={5}
+            />
+            <MessageItem
+              avatar={<Avatar name="Parker Johnson" presence="away" decorative />}
+              name="Parker Johnson"
+              time="08:02 AM"
+              preview="Create new account by email"
+            />
+            <MessageItem
+              avatar={<Avatar name="Catrin North" presence="offline" decorative />}
+              name="Catrin North"
+              time="1d"
+              preview="Leave new review — Electronics order #10982"
+              selected
+            />
+          </ul>
         </div>
       </div>
 
       <div className={styles.demoStack}>
-        <span className={styles.demoLabel}>Notification</span>
-        <div style={cardBox}>
-          <div style={{ display: "flex", gap: 12 }}>
-            <Avatar initials="🏃" size={32} />
-            <div>
-              <div style={{ fontSize: "var(--font-size-xs)", color: "var(--color-text-muted)" }}>10:30 AM</div>
-              <div style={{ fontSize: "var(--font-size-sm)" }}>
-                <strong>Cardio progress updated</strong> – 7.5 km completed out of 10 km goal for endurance improvement
-              </div>
-            </div>
-          </div>
-        </div>
+        <span className={styles.demoLabel}>Notification (bell dropdown) — shared/ui NotificationPanel</span>
+        <NotificationPanel
+          title="Bildirishnomalar"
+          tabs={[
+            { value: "all", label: "Barchasi", count: 1234 },
+            { value: "following", label: "Kuzatiladi", count: 3 },
+            { value: "orders", label: "Buyurtmalar", count: 3 },
+          ]}
+          activeTab="all"
+          onMarkAllRead={() => undefined}
+        >
+          <NotificationItem
+            media={<Avatar name="J Davidson" decorative />}
+            title="J. Davidson"
+            body="Chegirma dasturiga qo'shildi"
+            time="2h oldin"
+            category="Takliflar"
+            unread
+            actions={
+              <>
+                <Button fullWidth={false} onClick={() => undefined}>Qabul qilish</Button>
+                <Button fullWidth={false} variant="secondary" onClick={() => undefined}>Rad etish</Button>
+              </>
+            }
+          />
+          <NotificationItem
+            media={<Avatar name="Mark Dowers" decorative />}
+            title="Mark Dowers"
+            body="Email orqali yangi hisob yaratdi"
+            time="3h oldin"
+            category="Referal havola"
+          />
+          <NotificationItem
+            media={<Avatar name="Catrin North" decorative />}
+            title="Catrin North"
+            body="Yangi sharh qoldirdi"
+            time="1d oldin"
+            category="Elektronika"
+          />
+        </NotificationPanel>
       </div>
 
       <div className={styles.demoStack}>
@@ -300,7 +314,7 @@ function NavSection() {
             <div key={n.label} style={{ ...rowBase, color: i === 0 ? "var(--color-primary-600)" : "var(--color-text)", background: i === 0 ? "var(--color-surface)" : "transparent", fontWeight: i === 0 ? 700 : 500 }}>
               <span style={{ color: "var(--color-primary-600)", display: "inline-flex" }}>{n.icon}</span>
               <span style={{ flex: 1 }}>{n.label}</span>
-              {n.badge && <span style={{ minWidth: 20, height: 20, padding: "0 6px", borderRadius: "var(--radius-pill)", background: "var(--color-danger)", color: "#fff", fontSize: 11, fontWeight: 700, display: "inline-flex", alignItems: "center", justifyContent: "center" }}>{n.badge}</span>}
+              {n.badge && <Badge tone="danger" count>{n.badge}</Badge>}
             </div>
           ))}
         </div>

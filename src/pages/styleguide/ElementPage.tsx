@@ -1,6 +1,6 @@
-import type { CSSProperties, ComponentType, SVGProps } from "react";
+import type { ComponentType, SVGProps } from "react";
 import styles from "./StyleGuide.module.css";
-import { CategoryIcon } from "../../shared/ui";
+import { CategoryIcon, Avatar, AvatarGroup } from "../../shared/ui";
 import { CATEGORY_ICON_KEYS, CATEGORY_COLOR_TOKENS } from "../../shared/lib/categoryTokens";
 import {
   DashboardIcon,
@@ -51,15 +51,6 @@ const SHADOW: { name: string; varName: string }[] = [
   { name: "shadow-sm", varName: "--shadow-sm" },
   { name: "shadow-md", varName: "--shadow-md" },
 ];
-
-function Avatar({ initials, size }: { initials: string; size: number }) {
-  const style: CSSProperties = { width: size, height: size, fontSize: Math.round(size * 0.4) };
-  return (
-    <span className={styles.avatar} style={style} aria-hidden="true">
-      {initials}
-    </span>
-  );
-}
 
 export function ElementPage() {
   return (
@@ -114,17 +105,27 @@ export function ElementPage() {
 
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Avatarlar</h2>
+        <p className={styles.sectionDesc}>
+          Yagona <code>Avatar</code> komponenti (<code>shared/ui</code>): o'lchamlar, presence nuqtasi va guruh.
+        </p>
         <div className={styles.avatarRow}>
-          <Avatar initials="AB" size={28} />
-          <Avatar initials="AB" size={36} />
-          <Avatar initials="AB" size={44} />
-          <Avatar initials="AB" size={56} />
-          <span className={styles.avatarGroup}>
-            <Avatar initials="AB" size={36} />
-            <Avatar initials="CD" size={36} />
-            <Avatar initials="EF" size={36} />
-            <Avatar initials="+5" size={36} />
-          </span>
+          <Avatar name="Abror Bek" size={28} decorative />
+          <Avatar name="Abror Bek" size={36} decorative />
+          <Avatar name="Abror Bek" size={44} decorative />
+          <Avatar name="Abror Bek" size={56} decorative />
+          <Avatar name="Karim Bek" size={44} variant="solid" decorative />
+        </div>
+        <div className={styles.avatarRow}>
+          <Avatar name="Onlayn" size={40} presence="online" decorative />
+          <Avatar name="Uzoqda" size={40} presence="away" decorative />
+          <Avatar name="Band" size={40} presence="busy" decorative />
+          <Avatar name="Oflayn" size={40} presence="offline" decorative />
+          <AvatarGroup ariaLabel="Jamoa a'zolari">
+            <Avatar initials="AB" size={36} decorative />
+            <Avatar initials="CD" size={36} decorative />
+            <Avatar initials="EF" size={36} decorative />
+            <Avatar initials="+5" size={36} variant="solid" decorative />
+          </AvatarGroup>
         </div>
       </section>
 

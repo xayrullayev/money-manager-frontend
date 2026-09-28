@@ -26,6 +26,7 @@
      Qora matn (#242E2C) bu fon ustida ~13:1 — AAA. */
   --color-accent-light: #bbf49c;
   --color-presence-online: #3fb96a; /* Presence — onlayn nuqta (Design-Migrate-07) */
+  --color-accent-light-border: #7fbf5f; /* Green-Light chegara/stroke — chart bar konturi (Design-Migrate-07) */
 
   /* Figma 4:2: Background/Neutral/Tertiary, Text/Default/Default,
    * Border/Neutral/Secondary. Hover is a neutral companion state. */
