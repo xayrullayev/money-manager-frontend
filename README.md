@@ -180,3 +180,17 @@ Bosh sahifadagi "Kunlik limit" bloki — bugungi xarajat kunlik limitga nisbatan
 - **O'chirish:** tasdiq dialogi (fokus "Bekor qilish"da) → `DELETE` → blok "o'rnatilmagan" holatiga + toast.
 - **Menyu (a11y):** `aria-haspopup="menu"`, `aria-expanded`, `role=menu/menuitem`; ↑/↓, Home/End; Esc va tashqariga bosish yopib fokusni tugmaga qaytaradi; bosish maydonlari ≥ 44px.
 - **Tekshiruv (2026-09-28):** `tests/dailyLimit.test.cjs` (+ `money.test.cjs` ro'yxatga olindi); real backend + PostgreSQL 18 bilan Playwright: 390 va 320 px'da to'liq ssenariy (yaratish → xarajat → foiz o'sishi → OVER → STALE_VERSION → DAILY_LIMIT_EXISTS → o'chirish), dashboard 320/390/768/1440 da gorizontal scroll 0, konsol xatosi 0.
+
+
+## Jamg‘arma rejalari (Frontend-Savings-01…05)
+
+`/savings` himoyalangan, lazy yuklanadigan sahifa. Sidebar va mobil menyuda **Jamg‘arma** bandi mavjud. Dashboardda jami jamg‘arma va dastlabki uchta faol reja ko‘rinadi; `?new=1` yaratish dialogini, `?plan=<id>` tegishli rejani ochadi.
+
+- Uch ko‘rsatkich: jami jamg‘arma, jami maqsad, faol rejalar. Reja yaratish/tahrirlash, ikon/rang, maqsad summasi, ixtiyoriy muddat, arxivlash/tiklash.
+- Hissa qo‘shish va yechish, sana/izoh, aniq decimal hisoblangan progress preview. Valyuta profilning bazaviy valyutasiga mos; sana profil vaqt zonasidan olinadi.
+- Haqiqiy `/savings/plans/{id}/balance?year=` grafigi, kelajak oylarida qiymat yo‘q; aniq qiymatlar ochiladigan ro‘yxatda. Hissalar tarixi cursor pagination bilan, immutable reversal orqali bekor qilish.
+- 6 soniyalik Undo toast; sahifa almashishi Undo’ni bekor qilmaydi. Sessiyadan chiqish kutilayotgan amalni bir marta yakunlaydi. Hissa POST retry kaliti UUID v4: bir xil payload forma ochiq turgan vaqt davomida bir kalitni saqlaydi.
+- Summalar decimal string, preview BigInt; faqat grafik koordinatalari uchun Number. `mm.balanceHidden` umumiy sozlamasi summalar, foizlar, progress va grafik qiymatlarini yashiradi. Tahrirlash dialogi foydalanuvchi so‘ragan qiymatni o‘zgartirish uchun ko‘rsatadi.
+- `ProgressBar` va `SavingPlanIcon` shared UI; variantlar `/style-guide/components` da. Member va Saving Tips keyingi bosqichga qoldirilgan.
+
+Tekshiruv: 68 ta test (API kontrakt adapteri, aniq pul/chegaralar, UUID retry, Undo poygasi, React server-render privacy va progress a11y), production build. Native Chrome’da namunaviy ma’lumotli sahifa va yaratish dialogi ochilishi ko‘rildi. Bu **real backend bilan end-to-end yoki 320/390/768/1440 yakuniy QA tasdig‘i emas**: brauzerning admin policy tekshiruvi ishlamagani sababli qolgan vizual/amaliy QA bloklangan. Staging va to‘liq ekran o‘lchamlari bo‘yicha tekshiruv Review / QA’da qoladi. Batafsil: `SAVINGS_VALIDATION.md`.

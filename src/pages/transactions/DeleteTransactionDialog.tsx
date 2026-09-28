@@ -6,6 +6,7 @@ import styles from "./TransactionsPage.module.css";
 
 interface Props {
   transaction: Transaction;
+  hidden?: boolean;
   onCancel: () => void;
   onConfirm: () => void;
 }
@@ -15,7 +16,7 @@ interface Props {
  * Tasdiqlangach operatsiya darhol o'chmaydi — 6 soniyalik Undo toast beriladi (TransactionsPage).
  * Boshlang'ich fokus "Bekor qilish"da (xavfli harakat tasodifan tasdiqlanmasin).
  */
-export function DeleteTransactionDialog({ transaction: tx, onCancel, onConfirm }: Props) {
+export function DeleteTransactionDialog({ transaction: tx, hidden = false, onCancel, onConfirm }: Props) {
   return (
     <Dialog title="Operatsiyani o‘chirish" onClose={onCancel}>
       <dl className={styles.deleteSummary}>
@@ -37,10 +38,10 @@ export function DeleteTransactionDialog({ transaction: tx, onCancel, onConfirm }
         </div>
         <div>
           <dt>Summa</dt>
-          <dd className={styles.deleteAmount}>{transactionAmount(tx)}</dd>
+          <dd className={styles.deleteAmount}>{hidden ? "••••••" : transactionAmount(tx)}</dd>
         </div>
       </dl>
-      <p className={styles.deleteEffect}>{deletionEffect(tx)}</p>
+      <p className={styles.deleteEffect}>{hidden ? "O‘chirilganda ushbu operatsiyaning hisob qoldig‘iga ta’siri bekor qilinadi." : deletionEffect(tx)}</p>
       <div className={styles.dialogActions}>
         <Button variant="secondary" onClick={onCancel} data-autofocus>
           Bekor qilish

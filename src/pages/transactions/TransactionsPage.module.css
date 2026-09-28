@@ -46,3 +46,14 @@
 
 .page header > button { margin-top:var(--space-4); }
 @media(min-width:1024px) { .filters { grid-template-columns:repeat(3,minmax(0,1fr)); } .table th,.table td { padding:var(--space-4); } }
+
+.headerActions,.dialogActions { display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-4); }
+.dialogActions { justify-content:flex-end; }
+.dangerButton { color:var(--color-danger); background:var(--color-danger-bg); }
+.deleteSummary { display:grid; gap:var(--space-3); margin:0; }
+.deleteSummary > div { display:grid; grid-template-columns:1fr 2fr; gap:var(--space-3); }
+.deleteSummary dt { color:var(--color-text-muted); }
+.deleteSummary dd { margin:0; overflow-wrap:anywhere; }
+.deleteAmount { font-weight:600; }
+.deleteEffect { color:var(--color-text-muted); line-height:1.6; }
+@media(max-width:479px) { .headerActions > button,.dialogActions > button { flex:1; } }

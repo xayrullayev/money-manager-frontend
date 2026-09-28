@@ -19,3 +19,9 @@ export { MenuButton, type MenuItem } from "./Menu";
 
 export { ProgressBar } from "./ProgressBar";
 export { SavingPlanIcon } from "./SavingPlanIcon";
+
+// Design-Migrate-07 — Item komponentlari (avatar/presence, badge, inbox, bildirishnoma)
+export { Avatar, AvatarGroup, type AvatarPresence } from "./Avatar";
+export { Badge, type BadgeTone } from "./Badge";
+export { MessageItem } from "./MessageItem";
+export { NotificationItem, NotificationPanel, type NotificationTab } from "./Notification";

@@ -1,1 +1,25 @@
-.icon{display:inline-flex;align-items:center;justify-content:center;flex:none;border-radius:var(--radius-pill);color:var(--color-primary-500);background:color-mix(in srgb,var(--saving-icon-color) 15%,var(--color-surface));}.md{width:var(--space-12);height:var(--space-12)}.sm{width:var(--space-8);height:var(--space-8)}.icon svg{width:55%;height:55%}
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  border-radius: var(--radius-pill);
+  color: var(--color-primary-500);
+  background: color-mix(
+    in srgb,
+    var(--saving-icon-color) 15%,
+    var(--color-surface)
+  );
+}
+.md {
+  width: var(--space-12);
+  height: var(--space-12);
+}
+.sm {
+  width: var(--space-8);
+  height: var(--space-8);
+}
+.icon svg {
+  width: 55%;
+  height: 55%;
+}

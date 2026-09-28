@@ -32,6 +32,7 @@ export const router = createBrowserRouter([
     // Pathless layout route: har qanday sahifa ichidagi render xatosi shu yerda
     // ushlanadi (React Router'ning standart stack-trace ekrani o'rniga).
     errorElement: <RouteErrorPage />,
+    hydrateFallbackElement: <p role="status">Sahifa yuklanmoqda…</p>,
     children: [
       { path: "/register", element: <PhoneEntryScreen mode="register" /> },
       { path: "/register/verify", element: <OtpVerifyScreen mode="register" /> },
