@@ -1,0 +1,122 @@
+/**
+ * Style & Component — IZOLYATSIYA qilingan (frozen) dizayn tokenlari.
+ *
+ * Bu fayl style guide'ni asosiy app'dan AJRATADI: barcha token qiymatlari shu yerda
+ * `.sgui-root` scope ostida QOTIRILGAN. CSS custom property'lari eng yaqin ajdoddan
+ * olinadi, shuning uchun `src/styles/tokens.css` (global :root) o'zgarsa ham,
+ * `.sgui-root` ichidagi hamma narsa (shared/ui komponentlari ham shu scope'da render
+ * bo'ladi) shu frozen qiymatlarni ishlatadi.
+ *
+ * MAQSAD: bu modul faqat NAMUNA — asosiy app CSS/token o'zgarishlari bu yerga
+ * ta'sir qilmaydi. Dizayn etaloni o'zgarganda (kamdan-kam), qiymatlar SHU faylda
+ * qo'lda yangilanadi; app tokens.css avtomatik tarqalmaydi.
+ *
+ * Qotirilgan sana: 2026-09-28 (Finance Management / Animated Dashboard, yashil tizim).
+ */
+.sgui-root {
+  color-scheme: light;
+
+  /* Brand */
+  --color-primary-50: #ecf4e9;
+  --color-primary-100: #cbe2d8;
+  --color-primary-300: #5b8378;
+  --color-primary-500: #1e4841;
+  --color-primary-600: #173a34;
+  --color-primary-700: #102923;
+  --color-accent-light: #bbf49c;
+
+  /* Neutral control (tugma) */
+  --color-control-subtle: #e3e3e3;
+  --color-control-subtle-hover: #d5d5d5;
+  --color-control-text: #1e1e1e;
+  --color-control-border: #767676;
+  --color-control-primary-text: #f5f5f5;
+  --color-control-primary-border: #2c2c2c;
+
+  /* Neutral */
+  --color-bg: #fbfbfc;
+  --color-bg-subtle: #f6f8f7;
+  --color-surface: #fbfbfc;
+  --color-border: #bcbebd;
+  --color-border-strong: #9fa3a1;
+  --color-text: #242e2c;
+  --color-text-muted: #6b7271;
+  --color-text-inverse: #ffffff;
+
+  /* Semantik */
+  --color-success: #1e4841;
+  --color-success-bg: #ecf4e9;
+  --color-danger: #a43d32;
+  --color-danger-bg: #f7e9e7;
+  --color-warning: #b9762a;
+  --color-warning-bg: #faf1e6;
+  --color-income: #1e4841;
+  --color-expense: #a43d32;
+
+  /* Tipografiya */
+  --font-family-base: "Urbanist", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --line-height-tight: 1.2;
+  --line-height-base: 1.5;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Soyalar */
+  --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.06);
+  --shadow-md: 0 4px 12px rgba(17, 24, 39, 0.08);
+
+  /* O'lchamlar */
+  --touch-target-min: 44px;
+  --control-height: 48px;
+
+  /* Breakpoint (hujjat uchun) */
+  --breakpoint-mobile: 320px;
+  --breakpoint-mobile-lg: 390px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1440px;
+
+  /* Focus */
+  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-primary-500);
+  --focus-ring-color: var(--color-primary-500);
+
+  /* Qatlamlar */
+  --z-nav: 30;
+  --z-dropdown: 40;
+  --z-skip-link: 200;
+
+  /* Motion */
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+
+  /* Kategoriya ranglari (backend allowlist bilan bir xil) */
+  --category-green: #2e7d4f;   --category-green-bg: #e3f1e8;
+  --category-teal: #1b7f80;    --category-teal-bg: #dff0f0;
+  --category-blue: #2d65a8;    --category-blue-bg: #e2ebf6;
+  --category-purple: #7250a8;  --category-purple-bg: #ece6f5;
+  --category-pink: #b3486f;    --category-pink-bg: #f6e4eb;
+  --category-orange: #c0621f;  --category-orange-bg: #f9e9dc;
+  --category-yellow: #a07a12;  --category-yellow-bg: #f7f0d9;
+  --category-red: #b23c32;     --category-red-bg: #f7e3e1;
+  --category-gray: #6b7370;    --category-gray-bg: #eceeed;
+  --category-brown: #85563a;   --category-brown-bg: #f1e7e0;
+}

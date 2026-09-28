@@ -1,0 +1,53 @@
+/* Kunlik limit bloki (Frontend-05) — dizayn: sarlavha + ⋮, "sarflandi / limit" qatori, foiz, qalin pill progress. */
+.head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: var(--touch-target-min); margin: calc(-1 * var(--space-2)) 0; }
+.title { margin: 0; min-width: 0; font-size: var(--font-size-lg); line-height: 26px; font-weight: 600; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.title:focus:not(:focus-visible) { outline: none; }
+.menu { margin-right: calc(-1 * var(--space-3)); }
+
+.row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); }
+.amounts { margin: 0; min-width: 0; flex: 1 1 0; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--space-2); row-gap: 0; overflow-wrap: anywhere; line-height: var(--line-height-tight); }
+.spent { min-width: 0; font-size: var(--font-size-lg); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--color-text); }
+.of { min-width: 0; font-size: var(--font-size-md); font-weight: 400; color: var(--color-text-muted); font-variant-numeric: tabular-nums; }
+.percent { margin-left: auto; font-size: var(--font-size-lg); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.percentDanger { color: var(--color-danger); }
+
+.track { height: var(--space-3); border-radius: var(--radius-pill); background: var(--color-accent-light); overflow: hidden; }
+.trackDanger { background: var(--color-danger-bg); }
+.fill { height: 100%; border-radius: inherit; background: var(--color-primary-500); transition: width var(--transition-base); }
+.fillDanger { background: var(--color-danger); }
+
+.message { margin: 0; display: flex; align-items: flex-start; gap: var(--space-2); font-size: var(--font-size-sm); line-height: 20px; font-weight: 500; overflow-wrap: anywhere; }
+.message:empty { display: none; }
+.message svg { flex-shrink: 0; margin-top: 1px; }
+/* Warning rangi matn uchun AA emas (DESIGN_SYSTEM §2.3) — matn ink, faqat ikonka warning. */
+.warning { color: var(--color-text); }
+.warning svg { color: var(--color-warning); }
+.danger { color: var(--color-danger); }
+
+.none { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+.noneTitle { margin: 0; font-size: var(--font-size-md); font-weight: 600; }
+.noneText { margin: 0; color: var(--color-text-muted); line-height: var(--line-height-base); overflow-wrap: anywhere; }
+.noneCta { margin-top: var(--space-2); white-space: normal; height: auto; min-height: var(--touch-target-min); }
+
+.loading { display: flex; flex-direction: column; gap: var(--space-4); }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+@media (max-width: 767px) {
+  .title { font-size: var(--font-size-md); }
+  .spent { font-size: var(--font-size-md); }
+  .of { font-size: var(--font-size-sm); }
+  .percent { font-size: var(--font-size-md); }
+}
+@media (prefers-reduced-motion: reduce) { .fill { transition: none; } }
+
+/* Editor / o'chirish dialoglari (Frontend-06) */
+.form { display: grid; gap: var(--space-4); }
+.formText, .formHint, .formInfo { margin: 0; line-height: var(--line-height-base); overflow-wrap: anywhere; }
+.formHint { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+.formInfo { padding: var(--space-3); border-radius: var(--radius-md); background: var(--color-primary-50); color: var(--color-text); font-size: var(--font-size-sm); }
+.formProblem { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); padding: var(--space-3); border-radius: var(--radius-md); background: var(--color-danger-bg); }
+.formProblem p, .formError { margin: 0; color: var(--color-danger); font-size: var(--font-size-sm); line-height: var(--line-height-base); overflow-wrap: anywhere; }
+.formProblem button { white-space: normal; height: auto; min-height: var(--touch-target-min); }
+.formActions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-3); margin-top: var(--space-2); }
+.formActions button { white-space: normal; overflow-wrap: anywhere; height: auto; min-height: var(--touch-target-min); }
+@media (max-width: 390px) { .formActions { flex-direction: column-reverse; } .formActions button { width: 100%; } }

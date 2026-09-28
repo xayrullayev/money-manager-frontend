@@ -1,9 +1,12 @@
 @import "./styles/tokens.css";
 
-@font-face { font-family: "Inter"; font-style: normal; font-weight: 400; font-display: swap; src: url("./assets/fonts/Inter-Regular.ttf") format("truetype"); }
-@font-face { font-family: "Inter"; font-style: normal; font-weight: 500; font-display: swap; src: url("./assets/fonts/Inter-Medium.ttf") format("truetype"); }
-@font-face { font-family: "Inter"; font-style: normal; font-weight: 600; font-display: swap; src: url("./assets/fonts/Inter-SemiBold.ttf") format("truetype"); }
-@font-face { font-family: "Inter"; font-style: normal; font-weight: 700; font-display: swap; src: url("./assets/fonts/Inter-Bold.ttf") format("truetype"); }
+/* Urbanist — Design-Migrate (Finance Management System / Animated Dashboard).
+   Mahalliy woff2, weight 400/500/600/700/800. CDN'ga bog'liqlik yo'q. */
+@font-face { font-family: "Urbanist"; font-style: normal; font-weight: 400; font-display: swap; src: url("./assets/fonts/urbanist/Urbanist-400.woff2") format("woff2"); }
+@font-face { font-family: "Urbanist"; font-style: normal; font-weight: 500; font-display: swap; src: url("./assets/fonts/urbanist/Urbanist-500.woff2") format("woff2"); }
+@font-face { font-family: "Urbanist"; font-style: normal; font-weight: 600; font-display: swap; src: url("./assets/fonts/urbanist/Urbanist-600.woff2") format("woff2"); }
+@font-face { font-family: "Urbanist"; font-style: normal; font-weight: 700; font-display: swap; src: url("./assets/fonts/urbanist/Urbanist-700.woff2") format("woff2"); }
+@font-face { font-family: "Urbanist"; font-style: normal; font-weight: 800; font-display: swap; src: url("./assets/fonts/urbanist/Urbanist-800.woff2") format("woff2"); }
 
 * {
   box-sizing: border-box;

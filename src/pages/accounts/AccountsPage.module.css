@@ -10,7 +10,7 @@
 .total strong { font-size:30px; font-weight:600; overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
 .total small { color:var(--color-primary-50); line-height:1.6; }
 .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
-.card { display:flex; flex-direction:column; padding:24px; background:var(--color-surface); border-radius:16px; min-width:0; }
+.card { display:flex; flex-direction:column; padding:24px; background:var(--color-surface); border-radius:16px; box-shadow:var(--shadow-sm); min-width:0; }
 .cardHeading { display:flex; justify-content:space-between; gap:12px; align-items:center; }
 .type { font-size:13px; color:var(--color-text-muted); }
 .badge { background:var(--color-bg-subtle); padding:4px 8px; border-radius:6px; color:var(--color-text-muted); font-size:12px; }
@@ -20,7 +20,7 @@
 .actions button { font-size:14px; }
 .hint,.footnote { color:var(--color-text-muted); font-size:13px; line-height:1.7; margin:0; }
 .notice { margin:0; padding:16px; border-radius:12px; background:var(--color-success-bg); color:var(--color-success); }
-.state { padding:40px 24px; text-align:center; background:var(--color-surface); border-radius:16px; }
+.state { padding:40px 24px; text-align:center; background:var(--color-surface); border-radius:16px; box-shadow:var(--shadow-sm); }
 .state h2 { margin:0; font-size:20px; }
 .state p { color:var(--color-text-muted); line-height:1.7; margin:12px 0 24px; }
 .overlay { position:fixed; inset:0; z-index:60; background:rgba(22,44,38,.4); display:flex; align-items:center; justify-content:center; padding:24px; }
@@ -54,7 +54,7 @@
 .archiveText { margin:0 0 20px; line-height:1.7; }
 
 .categoryGroups { display:grid; gap:24px; grid-template-columns:repeat(2,minmax(0,1fr)); }
-.categoryGroup { background:var(--color-surface); border-radius:16px; padding:24px; min-width:0; }
+.categoryGroup { background:var(--color-surface); border-radius:16px; padding:24px; box-shadow:var(--shadow-sm); min-width:0; }
 .categoryGroupHeader { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
 .categoryGroupTitle { margin:0; font-size:18px; font-weight:600; }
 .categoryList { list-style:none; margin:0; padding:0; display:grid; gap:4px; }

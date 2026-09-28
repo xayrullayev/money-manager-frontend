@@ -15,3 +15,7 @@ export { DialogCancelButton } from "./Dialog";
 export { useDialogClose } from "./dialogContext";
 export { EmptyState } from "./EmptyState";
 export { Skeleton, SkeletonList } from "./Skeleton";
+export { MenuButton, type MenuItem } from "./Menu";
+
+export { ProgressBar } from "./ProgressBar";
+export { SavingPlanIcon } from "./SavingPlanIcon";

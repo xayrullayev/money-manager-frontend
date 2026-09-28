@@ -1,101 +1,129 @@
-.page { display: flex; flex-direction: column; gap: 28px; font-size: 14px; }
-.headerRow { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; max-width: 932px; }
+.page { display: flex; flex-direction: column; gap: 24px; font-size: 14px; }
+.headerRow { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
 .headerText { min-width: 0; }
 .pageTitle { margin: 0; font-size: 32px; line-height: 44px; font-weight: 700; letter-spacing: -0.02em; }
 .pageSubtitle { margin: 6px 0 0; color: var(--color-text-muted); line-height: 22px; }
-.page .desktopCta, .page .mobileCta { min-width: 214px; font-weight: 400; border-radius: 12px; }
-.periodRow { display: flex; align-items: flex-start; gap: 20px; }
-.periodSelect { width: 190px; height: 48px; padding: 0 24px; border: 1px solid var(--color-control-border); border-radius: 10px; background: var(--color-control-subtle); color: var(--color-control-text); font-size: 16px; cursor: pointer; }
-.periodCaption { color: var(--color-text-muted); line-height: 22px; }
-.summaryGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
-.summaryCard { min-width: 0; min-height: 144px; padding: 24px; border-radius: 16px; background: var(--color-surface); display: flex; flex-direction: column; gap: 8px; }
-.summaryLabel { color: var(--color-text-muted); font-weight: 500; line-height: 20px; }
-.summaryValue { font-size: clamp(22px, 2vw, 28px); font-weight: 600; line-height: 40px; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
-.summaryMeta { color: var(--color-text-muted); font-size: 13px; line-height: 20px; }
-.income { color: var(--color-income); }
-.expense { color: var(--color-expense); }
-.transfer { color: var(--color-text-muted); }
-.page .balanceToggle { min-width: 190px; font-weight: 400; border-radius: 10px; }
-.detailGrid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 24px; align-items: start; }
-.card { min-width: 0; background: var(--color-surface); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
-.cardTitle { margin: 0; font-size: 20px; line-height: 28px; font-weight: 600; letter-spacing: -0.02em; }
-.dateGroupLabel { color: var(--color-text-muted); font-size: 13px; line-height: 20px; }
-.dateGroup + .dateGroup { padding-top: 20px; }
-.transactionRow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(120px, 30.5%); align-items: start; gap: 20px; padding: 20px 0; min-height: 85px; border-bottom: 1px solid var(--color-border); }
-.transactionText { min-width: 0; }
-.transactionTitle { font-weight: 500; line-height: 22px; overflow-wrap: anywhere; }
-.transactionSubtitle { margin-top: 2px; color: var(--color-text-muted); font-size: 13px; line-height: 20px; overflow-wrap: anywhere; }
-.transactionAmount { font-size: 16px; line-height: 24px; font-weight: 600; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
-.page .transactionsLink, .page .budgetLink { align-self: flex-start; font-weight: 400; border-radius: 10px; }
-.page .transactionsLink { min-width: 240px; }
-.page .budgetLink { min-width: 220px; }
-/* Upcoming routes remain disabled, with the reference's neutral appearance. */
-.page .transactionsLink:disabled, .page .budgetLink:disabled { opacity: 1; }
-.budgetTotal { font-size: 18px; line-height: 28px; font-weight: 600; overflow-wrap: anywhere; }
+.page .desktopCta, .page .mobileCta { min-width: 200px; font-weight: 500; border-radius: 12px; }
+.periodRow { display: flex; align-items: center; gap: 16px; }
+.periodSelect { width: 190px; height: 44px; padding: 0 16px; border: 1px solid var(--color-control-border); border-radius: 10px; background: var(--color-surface); color: var(--color-control-text); font-size: 15px; cursor: pointer; }
+.periodCaption { color: var(--color-text-muted); }
+
+/* --- Yuqori grid: balans hero + 3 stat karta --- */
+.topGrid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 20px; }
+.balanceCard { min-width: 0; display: flex; flex-direction: column; gap: 8px; padding: 24px; border-radius: 16px; background: var(--color-primary-500); color: var(--color-text-inverse); }
+.balanceTop { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.balanceBrand { display: inline-flex; align-items: center; }
+.diamond { display: inline-block; position: relative; width: 15px; height: 15px; border: 1.5px solid currentColor; transform: rotate(45deg); }
+.diamond::after { content: ""; position: absolute; inset: 3px; background: currentColor; }
+.contactless { color: var(--color-accent-light); }
+.balanceLabel { color: var(--color-primary-50); font-size: 13px; }
+.balanceValue { font-size: clamp(26px, 2.4vw, 32px); font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.balanceFoot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 12px; }
+.balanceMeta { color: var(--color-primary-50); font-size: 13px; }
+.balanceToggle { background: rgba(255, 255, 255, 0.16); border: 0; color: var(--color-text-inverse); font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 999px; cursor: pointer; min-height: 32px; }
+.balanceToggle:hover { background: rgba(255, 255, 255, 0.28); }
+
+.statCard { min-width: 0; display: flex; align-items: center; gap: 14px; padding: 20px; border-radius: 16px; background: var(--color-surface); box-shadow: var(--shadow-sm); }
+.statChip { width: 44px; height: 44px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.statChip.income, .statChip.net { background: var(--color-primary-50); color: var(--color-primary-500); }
+.statChip.expense { background: var(--color-danger-bg); color: var(--color-danger); }
+.statText { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.statValue { font-size: clamp(18px, 1.6vw, 22px); font-weight: 700; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.statLabel { color: var(--color-text-muted); font-size: 13px; }
+.incomeText { color: var(--color-income); }
+.expenseText { color: var(--color-expense); }
+.transferText { color: var(--color-text-muted); }
+
+/* --- Asosiy grid: operatsiyalar + yon ustun --- */
+.mainGrid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); grid-template-areas: "main limit" "main side"; grid-template-rows: auto 1fr; gap: 20px; align-items: start; }
+.mainColumn { grid-area: main; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.dailyLimitCard { grid-area: limit; }
+.sideColumn { grid-area: side; }
+.sideColumn { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.card { min-width: 0; background: var(--color-surface); border-radius: 16px; padding: 24px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 16px; }
+.cardHead { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.cardTitle { margin: 0; font-size: 18px; line-height: 26px; font-weight: 600; letter-spacing: -0.01em; }
+.cardTitleMeta { color: var(--color-text-muted); font-weight: 400; font-size: 14px; }
+.cardLink { align-self: flex-start; background: none; border: 0; color: var(--color-primary-500); font: inherit; font-weight: 600; cursor: pointer; min-height: 40px; padding: 0; }
+.emptyState { margin: 0; padding: 20px 0; color: var(--color-text-muted); line-height: 1.7; }
+
+/* Operatsiyalar jadvali */
+.tableWrap { min-width: 0; overflow-x: auto; }
+.txTable { width: 100%; border-collapse: separate; border-spacing: 0; }
+.txTable th { text-align: left; font-size: 13px; font-weight: 600; color: var(--color-text-muted); background: var(--color-primary-50); padding: 10px 12px; }
+.txTable th:first-child { border-radius: 8px 0 0 8px; }
+.txTable th:last-child { border-radius: 0 8px 8px 0; }
+.txTable td { padding: 14px 12px; border-bottom: 1px solid var(--color-border); vertical-align: middle; overflow-wrap: anywhere; }
+.txTable tr:last-child td { border-bottom: 0; }
+.right { text-align: right; }
+.txTitle { display: block; font-weight: 500; line-height: 20px; }
+.txSub { display: block; margin-top: 2px; color: var(--color-text-muted); font-size: 12px; line-height: 18px; }
+.txDate { color: var(--color-text-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.txAmount { font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* Statistika donut */
+.donutWrap { display: grid; grid-template-areas: "chart" "legend"; justify-items: center; align-items: center; gap: 20px; }
+.donut { grid-area: chart; width: 176px; height: 176px; }
+.donutCenter { grid-area: chart; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; pointer-events: none; }
+.donutCaption { color: var(--color-text-muted); font-size: 12px; }
+.donutTotal { font-size: 20px; font-weight: 700; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.legend { grid-area: legend; width: 100%; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.legendRow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 10px; }
+.legendDot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.legendName { min-width: 0; overflow-wrap: anywhere; }
+.legendPct { color: var(--color-text-muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.legendAmount { font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Budjet */
+.budgetTotal { font-size: 18px; line-height: 28px; font-weight: 600; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
 .budgetMeta, .budgetMetaExceeded { font-size: 13px; line-height: 20px; color: var(--color-text-muted); }
 .budgetMetaExceeded { color: var(--color-danger); }
 .progressTrack { height: 10px; border-radius: 999px; background: var(--color-primary-50); overflow: hidden; }
 .progressFill { height: 100%; background: var(--color-primary-500); border-radius: inherit; transition: width var(--transition-base); }
 .progressFillExceeded { background: var(--color-danger); }
-.budgetCategoryList { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 20px; }
-.budgetCategoryRow { line-height: 20px; overflow-wrap: anywhere; }
+
 .footerNote { margin: 0; color: var(--color-text-muted); font-size: 13px; line-height: 20px; }
-.emptyState { margin: 0; padding: 24px 0; color: var(--color-text-muted); line-height: 1.7; }
-.errorState { padding: 32px; border: 1px solid var(--color-border); background: var(--color-surface); border-radius: 16px; }
+.errorState { padding: 32px; border: 1px solid var(--color-border); background: var(--color-surface); border-radius: 16px; box-shadow: var(--shadow-sm); }
 .errorState h2 { margin-top: 0; font-size: 20px; }
 .errorState p { color: var(--color-text-muted); }
-.loadingState { display: grid; gap: 28px; }
+
+.loadingState { display: grid; gap: 24px; }
 .skeleton { border-radius: 16px; background: linear-gradient(100deg, var(--color-primary-50) 20%, var(--color-surface) 50%, var(--color-primary-50) 80%); background-size: 200% 100%; animation: shimmer 1.5s linear infinite; }
-.skeletonSummary { min-height: 144px; }
+.skeletonSummary { min-height: 132px; }
 .skeletonDetail { min-height: 360px; }
 @keyframes shimmer { to { background-position: -200% 0; } }
-.mobileOnly, .page .mobileCta, .mobileBalanceToggle, .amountCurrency { display: none; }
+
+.page .mobileCta { display: none; }
+
 @media (min-width: 768px) and (max-width: 1100px) {
-  .detailGrid { grid-template-columns: minmax(0, 1fr); }
-  .summaryGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .topGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .balanceCard { grid-column: 1 / -1; }
-  .summaryCard { padding: 20px; }
-  .summaryValue { font-size: 22px; }
+  .mainGrid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "limit" "main" "side"; grid-template-rows: auto; }
   .headerRow { flex-wrap: wrap; }
 }
+
 @media (max-width: 767px) {
   .page { gap: 20px; }
   .headerRow { display: block; }
-  .pageTitle { font-size: 28px; line-height: 36px; }
-  .pageSubtitle, .page .desktopCta, .desktopOnly, .desktopBalanceToggle, .summaryMeta, .footerNote { display: none; }
-  .periodRow { align-items: center; gap: 8px; flex-wrap: wrap; margin-top: -4px; }
-  .periodSelect { width: auto; max-width: 100%; height: var(--touch-target-min); padding: 0 4px 0 0; border: 0; border-radius: 4px; background: transparent; color: var(--color-text-muted); font-size: 12px; }
-  .periodCaption { font-size: 12px; }
-  .summaryGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 0; }
-  .summaryCard { min-height: 0; padding: 16px; gap: 4px; }
-  .summaryLabel { font-size: 12px; font-weight: 400; }
-  .summaryLabel::first-letter { text-transform: uppercase; }
-  .summaryValue { font-size: 16px; line-height: 24px; }
-  .balanceCard { grid-column: 1 / -1; padding: 24px; gap: 10px; background: var(--color-primary-500); color: var(--color-text-inverse); border-radius: 14px; }
-  .balanceCard .summaryLabel { color: var(--color-primary-50); }
-  .balanceCard .summaryValue { font-size: 28px; line-height: 36px; }
-  .balanceCard .amountCurrency { display: inline; }
-  .mobileBalanceToggle, .mobileOnly { display: inline; }
-  .page .balanceToggle { min-width: 0; width: 100%; max-width: 228px; font-size: 14px; }
-  .incomeCard { border-radius: 14px 0 0 14px; }
-  .expenseCard { border-radius: 0 14px 14px 0; }
-  .page .mobileCta { display: inline-flex; min-width: 0; width: 100%; font-size: 14px; border-radius: 8px; }
-  .detailGrid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  .card { padding: 20px; gap: 12px; border-radius: 14px; }
-  .cardTitle { font-size: 16px; line-height: 24px; }
-  .budgetCard { order: -1; gap: 8px; }
-  .budgetTotal { font-size: 14px; line-height: 20px; font-weight: 400; }
-  .budgetMeta { color: var(--color-income); font-size: 12px; }
-  .budgetMetaExceeded { font-size: 12px; }
-  .budgetCard .progressTrack, .budgetCategoryList, .page .budgetLink { display: none; }
-  .dateGroupLabel { font-size: 12px; }
-  .transactionRow { grid-template-columns: 1fr; gap: 8px; padding: 16px 0; min-height: 0; }
-  .transactionTitle { font-size: 13px; }
-  .transactionSubtitle { font-size: 12px; }
-  .transactionAmount { font-size: 14px; line-height: 20px; }
-  .transactionAmount .amountCurrency { display: inline; }
-  .page .transactionsLink { min-width: 0; max-width: 100%; font-size: 14px; }
-  .skeletonSummary:first-child { grid-column: 1 / -1; min-height: 170px; }
-  .skeletonSummary:not(:first-child) { min-height: 76px; }
+  .pageTitle { font-size: 26px; line-height: 34px; }
+  .pageSubtitle, .page .desktopCta, .footerNote { display: none; }
+  .periodRow { gap: 8px; flex-wrap: wrap; }
+  .periodSelect { height: var(--touch-target-min); font-size: 13px; }
+  .topGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .balanceCard { grid-column: 1 / -1; }
+  .statCard { flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px; }
+  .statValue { font-size: 17px; }
+  .statLabel { font-size: 12px; }
+  .page .mobileCta { display: inline-flex; width: 100%; min-width: 0; border-radius: 10px; }
+  .mainGrid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "limit" "main" "side"; grid-template-rows: auto; gap: 16px; }
+  .mainColumn { gap: 16px; }
+  .card { padding: 18px; border-radius: 14px; }
+  .cardTitle { font-size: 16px; }
+  .cardTitleMeta { display: none; }
+  .txTable th, .txTable td { padding: 10px 8px; }
+  .txDate { font-size: 12px; }
 }
 @media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } .progressFill { transition: none; } }
+
+/* Semantik hook klasslar — uslub .card asosida meros. */
+.transactionsCard, .statisticCard, .budgetCard, .dailyLimitCard { min-width: 0; }

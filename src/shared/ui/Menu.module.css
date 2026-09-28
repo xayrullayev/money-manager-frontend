@@ -1,0 +1,30 @@
+.root { position: relative; display: inline-flex; flex-shrink: 0; }
+
+.trigger {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: var(--touch-target-min); height: var(--touch-target-min);
+  padding: 0; border: 0; border-radius: var(--radius-pill);
+  background: transparent; color: var(--color-text); cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+.trigger:hover, .trigger[aria-expanded="true"] { background: var(--color-primary-50); }
+.trigger:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+.menu {
+  position: absolute; top: calc(100% + var(--space-1)); right: 0; z-index: var(--z-dropdown);
+  display: flex; flex-direction: column;
+  min-width: 200px; max-width: calc(100vw - 2 * var(--space-4));
+  padding: var(--space-1); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  background: var(--color-surface); box-shadow: var(--shadow-md);
+}
+
+.item {
+  display: flex; align-items: center; min-height: var(--touch-target-min);
+  padding: var(--space-2) var(--space-3); border: 0; border-radius: var(--radius-sm);
+  background: transparent; color: var(--color-text); font: inherit; font-size: var(--font-size-md); font-weight: 500;
+  text-align: left; white-space: normal; overflow-wrap: anywhere; cursor: pointer;
+}
+.item:hover, .item:focus-visible { background: var(--color-primary-50); outline: none; }
+.item:focus-visible { box-shadow: inset 0 0 0 2px var(--focus-ring-color); }
+.danger { color: var(--color-danger); }
+.danger:hover, .danger:focus-visible { background: var(--color-danger-bg); }

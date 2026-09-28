@@ -1,0 +1,348 @@
+/**
+ * Style & Component — living style guide sahifalari uchun umumiy uslub.
+ * Faqat design tokenlardan foydalanadi (styles/tokens.css). Design-Migrate-01/02.
+ */
+.page {
+  min-height: 100vh;
+  background: var(--color-bg-subtle);
+  color: var(--color-text);
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.headerInner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4) 0;
+}
+
+.brand {
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.subtitle {
+  margin: var(--space-1) 0 var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.navLink {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  border-bottom: 2px solid transparent;
+}
+
+.navLink:hover {
+  color: var(--color-text);
+  background: var(--color-bg-subtle);
+}
+
+.navLinkActive {
+  color: var(--color-primary-500);
+  border-bottom-color: var(--color-primary-500);
+}
+
+.main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4) var(--space-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+.sectionDesc {
+  margin: calc(var(--space-1) * -1) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  max-width: 60ch;
+}
+
+/* --- Rang swatchlar --- */
+.swatchGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
+
+.swatch {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.swatchBox {
+  height: 88px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.swatchMeta {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.swatchName {
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+}
+
+.swatchVar {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.swatchHex {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: var(--font-size-xs);
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+
+/* --- Tipografiya --- */
+.typeRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.typeSample {
+  color: var(--color-text);
+  line-height: var(--line-height-tight);
+}
+
+.typeSpec {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* --- Ikonka to'plami --- */
+.iconGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-3);
+}
+
+.iconCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+}
+
+.iconLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* --- Avatarlar --- */
+.avatarRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-500);
+  color: var(--color-text-inverse);
+  font-weight: 700;
+}
+
+.avatarGroup {
+  display: inline-flex;
+}
+
+.avatarGroup > .avatar {
+  border: 2px solid var(--color-surface);
+  margin-left: -10px;
+}
+
+.avatarGroup > .avatar:first-child {
+  margin-left: 0;
+}
+
+/* --- Spacing / radius / shadow --- */
+.stackList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.spacingRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.spacingBar {
+  height: 16px;
+  background: var(--color-accent-light);
+  border-radius: var(--radius-sm);
+}
+
+.spacingLabel {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  min-width: 160px;
+}
+
+.tokenRowGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-4);
+}
+
+.tokenTile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.radiusBox {
+  width: 100%;
+  height: 72px;
+  background: var(--color-primary-50);
+  border: 1px solid var(--color-primary-300);
+}
+
+.shadowBox {
+  width: 100%;
+  height: 72px;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+.tokenName {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* --- Komponent demolari --- */
+.demoStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.demoRow {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.demoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+
+.demoLabel {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* --- Badge (Design-Migrate-02 gacha vaqtinchalik inline) --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.badgeSuccess {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.badgeDanger {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+
+.badgeWarning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+.badgeNeutral {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-muted);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.note {
+  padding: var(--space-3) var(--space-4);
+  border-left: 3px solid var(--color-warning);
+  background: var(--color-warning-bg);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}

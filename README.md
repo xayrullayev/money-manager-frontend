@@ -167,3 +167,16 @@ node tests/reports.integration.mjs --isolated-test-server http://localhost:8095 
 Test dev-only OTP logidan faqat o‘zi yaratgan user kodini xotirada oladi; kod, cookie va telefonni chop etmaydi. Test tugagach ajratilgan backendni to‘xtatish H2 sinov ma’lumotlarini yo‘qotadi. Bu test `npm test`ga avtomatik qo‘shilmagan: ishga tushirish uchun server va log yo‘li ochiq ko‘rsatilishi shart.
 
 Natija: build, lint va 32 util testi o‘tdi; lintda avvalgi 5 warning bor. Haqiqiy HTTP frontend integratsiyasida 12/12 tekshiruv o‘tdi. Bu Node/fetch adapteri + Spring Boot/H2 dalili; brauzer download-click, 320/390/768/1440 responsive, PostgreSQL/staging va haqiqiy telefondagi yakuniy tekshiruv o‘rnini bosmaydi. Ushbu qayta tekshiruvda brauzer sintetik sessiyasi qayta login talab qilgani uchun UI dalili sifatida hisoblanmadi.
+
+## Kunlik limit (Frontend-04…06)
+
+Bosh sahifadagi "Kunlik limit" bloki — bugungi xarajat kunlik limitga nisbatan. Kontrakt: [`docs/daily-limit-contract.md`](../docs/daily-limit-contract.md) (`GET/POST/PATCH/DELETE /api/v1/daily-limit`).
+
+- **Fayllar:** `shared/api/dailyLimit.ts` (API, `DailyLimitStatus`), `shared/lib/dailyLimit.ts` (bar kengligi, `aria-valuetext`, status → matn/ton, oshgan summa, input tekshiruvi — budjetdagi `validLimit` qoidasi), `pages/dashboard/DailyLimitCard.tsx` (blok), `pages/dashboard/DailyLimitEditor.tsx` (o'rnatish/tahrirlash va o'chirish dialoglari), `shared/ui/Menu.tsx` (`MenuButton` — umumiy ⋮ menyu).
+- **Joylashuv:** desktopda o'ng ustun tepasida; 1100px dan tor ekranda "So'nggi operatsiyalar"dan oldin. Operatsiya saqlangach blok qayta yuklanadi.
+- **Holatlar:** skelet → xato + "Qayta urinish"; limit yo'q — "Kunlik limit o'rnatilmagan" + "Limit o'rnatish" (⋮ yo'q); `OK`; `NEAR` — "Limitga yaqinlashdingiz" + ikonka; `REACHED` — "Kunlik limitga yetdingiz"; `OVER` — "Limitdan X oshdi" (manfiy `remaining`dan). Rang yagona signal emas. Bar kengligi `min(percent, 100)%`, foiz server stringi (`240.3%`).
+- **Pul:** summalar string; float hisob yo'q. `formatMoney` decimal stringni aniq formatlaydi — 17 xonali limit yaxlitlanmaydi, blokda faqat raqam guruhlari orasida qatorga o'tadi.
+- **Editor:** summa + valyuta, "Limit faqat xarajatlarni kuzatadi…" izohi. 400 → input ostida; 409 `DAILY_LIMIT_EXISTS` → holat qayta yuklanib tahrirlash rejimiga o'tadi (kiritilgan qiymat saqlanadi); 409 `STALE_VERSION` → "Limit boshqa joyda o'zgargan" + "So'nggi holatni yuklash"; 404 → yaratish rejimi; tarmoq xatosi → qiymat saqlanadi + "Qayta urinish". Takroriy submit ref-lock bilan bloklanadi, o'zgartirilgan forma yopilsa tasdiq so'raladi.
+- **O'chirish:** tasdiq dialogi (fokus "Bekor qilish"da) → `DELETE` → blok "o'rnatilmagan" holatiga + toast.
+- **Menyu (a11y):** `aria-haspopup="menu"`, `aria-expanded`, `role=menu/menuitem`; ↑/↓, Home/End; Esc va tashqariga bosish yopib fokusni tugmaga qaytaradi; bosish maydonlari ≥ 44px.
+- **Tekshiruv (2026-09-28):** `tests/dailyLimit.test.cjs` (+ `money.test.cjs` ro'yxatga olindi); real backend + PostgreSQL 18 bilan Playwright: 390 va 320 px'da to'liq ssenariy (yaratish → xarajat → foiz o'sishi → OVER → STALE_VERSION → DAILY_LIMIT_EXISTS → o'chirish), dashboard 320/390/768/1440 da gorizontal scroll 0, konsol xatosi 0.

@@ -1,0 +1,5 @@
+import {ProgressBar,SavingPlanIcon} from "../../../shared/ui";
+import {SAVING_ICONS} from "../../../shared/lib/savings";
+import {CATEGORY_COLOR_TOKENS} from "../../../shared/lib/categoryTokens";
+import styles from "../StyleGuide.module.css";
+export function SavingsSection(){return <section className={styles.section}><h2 className={styles.sectionTitle}>Jamg‘arma komponentlari</h2><div className={styles.demoStack}>{(["default","success","danger"] as const).map(variant=><div key={variant}><h3>{variant}</h3>{[0,60,100,125].map(value=><div key={value}><p>{value}%</p><ProgressBar value={value} variant={variant} size="sm"/><ProgressBar value={value} variant={variant} size="md"/></div>)}</div>)}<div className={styles.demoRow}>{Object.entries(SAVING_ICONS).map(([key,label])=><span key={key}><SavingPlanIcon iconKey={key}/>{label}</span>)}</div><div className={styles.demoRow}>{CATEGORY_COLOR_TOKENS.map(color=><span key={color}><SavingPlanIcon colorToken={color} size="sm"/>{color}</span>)}</div></div></section>;}

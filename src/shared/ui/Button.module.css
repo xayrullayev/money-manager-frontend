@@ -60,7 +60,7 @@
 .danger {
   background: var(--color-danger);
   border-color: var(--color-danger);
-  color: #fff;
+  color: var(--color-text-inverse);
 }
 
 .danger:not(:disabled):hover {

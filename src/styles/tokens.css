@@ -1,20 +1,30 @@
 /**
- * Design tokens — Design-02 asosida.
+ * Design tokens — Design-Migrate (Finance Management System / Animated Dashboard, Figma XJ2Q9khDPu7rK65H0JANs6).
  * Rang, tipografiya, spacing, radius va breakpoint o'zgaruvchilari.
- * Och rangli dizayn tizim mavzusidan qat’i nazar bir xil saqlanadi.
+ * Och rangli dizayn tizim mavzusidan qat'i nazar bir xil saqlanadi.
+ *
+ * Design-Migrate-02 (2026-09-28): brand palitra va shrift auditda tasdiqlangan
+ * yangi qiymatlarga o'tkazildi (Green-Dark #1E4841, Green-Light #BBF49C,
+ * Green-BG #ECF4E9, White #FBFBFC, Black #242E2C, Gray-30 #6B7271, Gray-20 #BCBEBD;
+ * shrift Urbanist). Token NOMLARI o'zgarmadi — komponentlar avtomatik meros oladi.
+ * Vizual (pixel) tasdiq Figma Starter MCP limiti ochilgach bajariladi.
  */
 :root {
   color-scheme: light;
   /*
-   * Brand rang — Figma'da rasmiy belgilangan token qiymatlari
-   * (canvas/surface/ink/muted/accent/soft/border/expense).
+   * Brand rang — Figma'da tasdiqlangan yangi qiymatlar
+   * (accent #1E4841, soft #ECF4E9, light #BBF49C).
    */
-  --color-primary-50: #e6f2ec;   /* soft */
-  --color-primary-100: #d3e9df;
-  --color-primary-300: #6fae97;
-  --color-primary-500: #14634d;  /* accent */
-  --color-primary-600: #0f4d3c;
-  --color-primary-700: #0a3529;
+  --color-primary-50: #ecf4e9;   /* soft — Green-BG (Figma) */
+  --color-primary-100: #cbe2d8;
+  --color-primary-300: #5b8378;
+  --color-primary-500: #1e4841;  /* accent — Green-Dark (Figma) */
+  --color-primary-600: #173a34;
+  --color-primary-700: #102923;
+
+  /* Green-Light (Figma) — yorug' aksent: highlight, grafik urg'usi, quyuq fon ustidagi CTA.
+     Qora matn (#242E2C) bu fon ustida ~13:1 — AAA. */
+  --color-accent-light: #bbf49c;
 
   /* Figma 4:2: Background/Neutral/Tertiary, Text/Default/Default,
    * Border/Neutral/Secondary. Hover is a neutral companion state. */
@@ -25,30 +35,31 @@
   --color-control-primary-text: #f5f5f5;
   --color-control-primary-border: #2c2c2c;
 
-  /* --- Neytral rang (Figma: canvas/surface/ink/muted/border) --- */
-  --color-bg: #ffffff;
-  --color-bg-subtle: #f6f8f7;    /* canvas */
-  --color-surface: #ffffff;      /* surface */
-  --color-border: #dce5df;       /* border */
-  --color-border-strong: #b9c7c0;
-  --color-text: #162c26;         /* ink */
-  --color-text-muted: #586a63;   /* muted */
+  /* --- Neytral rang (Figma: surface/ink/muted/border) --- */
+  --color-bg: #fbfbfc;
+  --color-bg-subtle: #f6f8f7;    /* canvas — neytral sahifa foni */
+  --color-surface: #fbfbfc;      /* surface — White (Figma) */
+  --color-border: #bcbebd;       /* border — Gray-20 (Figma) */
+  --color-border-strong: #9fa3a1;
+  --color-text: #242e2c;         /* ink — Black (Figma) */
+  --color-text-muted: #6b7271;   /* muted — Gray-30 (Figma) */
   --color-text-inverse: #ffffff;
 
   /* --- Semantik rang --- */
-  --color-success: #14634d;
-  --color-success-bg: #e6f2ec;
+  --color-success: #1e4841;
+  --color-success-bg: #ecf4e9;
   --color-danger: #a43d32;       /* expense */
   --color-danger-bg: #f7e9e7;
   --color-warning: #b9762a;
   --color-warning-bg: #faf1e6;
 
   /* --- Moliyaviy semantika: kirim/chiqim (Figma: accent / expense) --- */
-  --color-income: #14634d;
+  --color-income: #1e4841;
   --color-expense: #a43d32;
 
   /* --- Tipografiya --- */
-  --font-family-base: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  /* Urbanist (Figma). Heading 20–32px, title 8–18px, body 10–16px oralig'iga mos. */
+  --font-family-base: "Urbanist", -apple-system, "Segoe UI", system-ui, sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-md: 1rem;

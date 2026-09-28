@@ -30,8 +30,12 @@ function getNumberFormatter(currency: string): Intl.NumberFormat {
 export function formatAmount(amount: string | number, currency: string): string {
   const numeric = typeof amount === "string" ? Number(amount) : amount;
   if (!Number.isFinite(numeric)) return "—";
+  // Decimal string to'g'ridan-to'g'ri beriladi: Intl uni aniq o'nlik sifatida formatlaydi
+  // (17 xonali limit "99999999999999999" Number'da 1e17 ga yaxlitlanib qolardi).
+  const decimal = typeof amount === "string" ? amount.trim() : "";
+  const exact = /^-?\d+(\.\d+)?$/.test(decimal);
   return getNumberFormatter(currency)
-    .formatToParts(numeric)
+    .formatToParts(exact ? (decimal as unknown as number) : numeric) // ES2023 Intl string overload
     .map((part) => (part.type === "group" ? "\u00A0" : part.type === "decimal" ? "," : part.value))
     .join("");
 }

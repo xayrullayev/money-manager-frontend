@@ -1,0 +1,4 @@
+.track{width:100%;overflow:hidden;border-radius:var(--radius-pill);background:var(--color-accent-light)}
+.sm{height:var(--space-2)}.md{height:var(--space-3)}.fill{display:block;height:100%;background:var(--color-primary-500);border-radius:inherit;transition:width var(--transition-normal)}
+.success .fill{background:var(--color-primary-500)}.danger .fill{background:var(--color-danger)}
+@media(prefers-reduced-motion:reduce){.fill{transition:none}}
