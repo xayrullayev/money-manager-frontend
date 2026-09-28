@@ -1,0 +1,48 @@
+.page { display:grid; gap:var(--space-6); min-width:0; }
+.page h1 { margin:0; font-size:var(--font-size-2xl); }
+.page header p,.hint { margin:var(--space-2) 0 0; color:var(--color-text-muted); }
+.filters { display:grid; gap:var(--space-4); background:var(--color-surface); padding:var(--space-5); border-radius:var(--radius-lg); min-width:0; }
+.filters > * { min-width:0; }
+.search { grid-column:1/-1; }
+.chips { display:flex; flex-wrap:wrap; gap:var(--space-2); }
+.chips > button { min-height:var(--touch-target-min); max-width:100%; border:1px solid var(--color-border); background:var(--color-primary-50); color:var(--color-primary-700); border-radius:var(--radius-pill); padding:var(--space-2) var(--space-4); font:inherit; overflow-wrap:anywhere; cursor:pointer; }
+.state { padding:var(--space-6); background:var(--color-surface); border-radius:var(--radius-lg); text-align:center; }
+.summaryNotice { padding:var(--space-4) var(--space-5); background:var(--color-surface); border-radius:var(--radius-lg); color:var(--color-text-muted); }
+.summaryNotice p { margin:0; }
+.summaryNotice button { margin-top:var(--space-3); }
+.summaryGrid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-3); }
+.summaryGrid > div { display:grid; gap:var(--space-2); min-width:0; padding:var(--space-4); background:var(--color-surface); border-radius:var(--radius-lg); }
+.summaryGrid span { color:var(--color-text-muted); font-size:var(--font-size-sm); }
+.summaryGrid strong { overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+.state h2 { font-size:var(--font-size-lg); }
+.skeleton { height:var(--control-height); background:var(--color-bg-subtle); margin-top:var(--space-3); border-radius:var(--radius-sm); }
+.table { display:none; }
+.mobile { display:grid; gap:var(--space-6); }
+.mobile h2 { font-size:var(--font-size-sm); color:var(--color-text-muted); margin:0 0 var(--space-3); }
+.mobileRow { width:100%; display:grid; gap:var(--space-3); border:0; border-bottom:1px solid var(--color-border); background:var(--color-surface); text-align:left; padding:var(--space-4); font:inherit; color:var(--color-text); cursor:pointer; }
+.mobileRow > span { min-width:0; }
+.mobileRow strong,.mobileRow small { display:block; overflow-wrap:anywhere; }
+.mobileRow small { color:var(--color-text-muted); margin-top:var(--space-2); }
+.note { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--color-text-muted); margin-top:var(--space-1); font-size:var(--font-size-sm); }
+.INCOME { color:var(--color-income); }
+.EXPENSE { color:var(--color-expense); }
+.TRANSFER { color:var(--color-text); }
+.details { display:grid; gap:var(--space-2); }
+.details dt { color:var(--color-text-muted); font-size:var(--font-size-sm); }
+.details dd { margin:0 0 var(--space-3); overflow-wrap:anywhere; white-space:pre-wrap; }
+.srOnly { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+@media(min-width:768px) {
+  .filters { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .table { display:table; width:100%; table-layout:fixed; border-collapse:collapse; background:var(--color-surface); }
+  .table th,.table td { padding:var(--space-2); font-size:var(--font-size-sm); text-align:left; border-bottom:1px solid var(--color-border); overflow-wrap:anywhere; }
+  .table th { font-size:var(--font-size-sm); color:var(--color-text-muted); }
+  .table td small { display:block; color:var(--color-text-muted); }
+  .table td:last-child { font-weight:600; }
+  .detailButton { color:var(--color-primary-500); border:0; background:transparent; min-height:var(--touch-target-min); padding:0; font:inherit; font-weight:600; text-align:left; cursor:pointer; overflow-wrap:anywhere; }
+  .mobile { display:none; }
+}
+
+@media(max-width:479px) { .summaryGrid { grid-template-columns:1fr; } }
+
+.page header > button { margin-top:var(--space-4); }
+@media(min-width:1024px) { .filters { grid-template-columns:repeat(3,minmax(0,1fr)); } .table th,.table td { padding:var(--space-4); } }

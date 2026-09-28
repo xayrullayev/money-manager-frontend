@@ -1,0 +1,72 @@
+.page { display:grid; gap:28px; font-size:14px; }
+.header { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; }
+.header h1 { margin:0; font-size:32px; line-height:1.4; letter-spacing:-.02em; }
+.header p { color:var(--color-text-muted); margin:6px 0 0; }
+.header button { flex-shrink:0; }
+.toolbar { display:flex; justify-content:space-between; align-items:center; gap:20px; color:var(--color-text-muted); }
+.checkbox { display:flex; align-items:center; gap:8px; min-height:44px; cursor:pointer; }
+.checkbox input { width:18px; height:18px; accent-color:var(--color-primary-500); }
+.total { display:grid; gap:12px; background:var(--color-primary-500); color:white; padding:28px; border-radius:16px; }
+.total strong { font-size:30px; font-weight:600; overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+.total small { color:var(--color-primary-50); line-height:1.6; }
+.grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
+.card { display:flex; flex-direction:column; padding:24px; background:var(--color-surface); border-radius:16px; min-width:0; }
+.cardHeading { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+.type { font-size:13px; color:var(--color-text-muted); }
+.badge { background:var(--color-bg-subtle); padding:4px 8px; border-radius:6px; color:var(--color-text-muted); font-size:12px; }
+.card h2 { margin:16px 0 8px; font-size:20px; font-weight:600; overflow-wrap:anywhere; }
+.balance { margin:0 0 24px; font-size:24px; font-weight:600; overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+.actions { display:flex; gap:16px; margin-top:auto; align-items:center; flex-wrap:wrap; }
+.actions button { font-size:14px; }
+.hint,.footnote { color:var(--color-text-muted); font-size:13px; line-height:1.7; margin:0; }
+.notice { margin:0; padding:16px; border-radius:12px; background:var(--color-success-bg); color:var(--color-success); }
+.state { padding:40px 24px; text-align:center; background:var(--color-surface); border-radius:16px; }
+.state h2 { margin:0; font-size:20px; }
+.state p { color:var(--color-text-muted); line-height:1.7; margin:12px 0 24px; }
+.overlay { position:fixed; inset:0; z-index:60; background:rgba(22,44,38,.4); display:flex; align-items:center; justify-content:center; padding:24px; }
+.dialog { background:var(--color-surface); border-radius:16px; padding:28px; max-width:480px; width:100%; max-height:calc(100dvh - 48px); overflow-y:auto; }
+.dialogHeader { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:20px; }
+.dialogHeader h2 { margin:0; font-size:22px; }
+.close { width:44px; height:44px; border:0; background:transparent; font-size:26px; color:var(--color-text-muted); cursor:pointer; }
+.form { display:grid; gap:18px; }
+.field { display:grid; gap:8px; }
+.field label { font-weight:500; }
+.field input,.field select { min-width:0; width:100%; min-height:48px; border:1px solid var(--color-border-strong); border-radius:10px; padding:10px 12px; font:inherit; color:var(--color-text); background:var(--color-surface); }
+.field input[aria-invalid="true"] { border-color:var(--color-danger); }
+.field small { color:var(--color-text-muted); font-size:12px; line-height:1.6; }
+.fieldError { color:var(--color-danger); font-size:12px; }
+.fieldError:empty { display:none; }
+.error { color:var(--color-danger); background:var(--color-danger-bg); padding:12px; border-radius:8px; margin:0; }
+.formActions { display:flex; gap:12px; justify-content:flex-end; margin-top:8px; }
+.archiveText { line-height:1.8; margin:0 0 24px; overflow-wrap:anywhere; }
+@media(max-width:1000px) { .grid { grid-template-columns:1fr; } .header { flex-wrap:wrap; } }
+@media(max-width:767px) {
+  .page { gap:20px; } .header h1 { font-size:28px; } .header button { width:100%; }
+  .toolbar { flex-wrap:wrap; gap:4px; } .total { padding:24px; } .total strong { font-size:26px; }
+  .overlay { align-items:flex-end; padding:0; } .dialog { border-radius:16px 16px 0 0; padding:20px 20px max(20px,env(safe-area-inset-bottom)); max-height:92dvh; }
+  .formActions button { flex:1; padding:0 12px; font-size:14px; }
+}
+
+/* Design-07: Tabs bilan bo'lingan ikki bo'lim (Hisoblar / Kategoriyalar) */
+.section { display:grid; gap:28px; }
+.sectionHeader { display:flex; align-items:flex-start; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+.sectionHeader p { color:var(--color-text-muted); margin:0; max-width:52ch; }
+.archiveText { margin:0 0 20px; line-height:1.7; }
+
+.categoryGroups { display:grid; gap:24px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+.categoryGroup { background:var(--color-surface); border-radius:16px; padding:24px; min-width:0; }
+.categoryGroupHeader { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+.categoryGroupTitle { margin:0; font-size:18px; font-weight:600; }
+.categoryList { list-style:none; margin:0; padding:0; display:grid; gap:4px; }
+.categoryRow { display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:var(--touch-target-min); padding:8px 0; border-bottom:1px solid var(--color-border); }
+.categoryRow:last-child { border-bottom:none; }
+.categoryName { display:flex; align-items:center; gap:10px; min-width:0; overflow-wrap:anywhere; }
+.categoryRow .actions { margin-top:0; flex-shrink:0; gap:8px; }
+
+@media (max-width:767px) {
+  .categoryGroups { grid-template-columns:1fr; }
+}
+@media (max-width:479px) {
+  .categoryRow { flex-wrap:wrap; }
+  .categoryRow .actions { width:100%; justify-content:flex-end; }
+}

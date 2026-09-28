@@ -1,0 +1,43 @@
+.row {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: space-between;
+}
+
+.rowError .box {
+  border-color: var(--color-danger);
+  animation: shake 260ms ease;
+}
+
+.box {
+  width: 44px;
+  height: 52px;
+  text-align: center;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.box:focus-visible {
+  border-color: var(--focus-ring-color);
+  box-shadow: var(--focus-ring);
+  outline: none;
+}
+
+.errorText {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+  text-align: center;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-8px); }
+  40%, 60% { transform: translateX(8px); }
+}

@@ -1,0 +1,15 @@
+.picker { display:grid; gap:16px; }
+.preview { display:flex; align-items:center; gap:12px; color:var(--color-text-muted); font-size:13px; }
+.group { border:0; margin:0; padding:0; min-width:0; display:grid; gap:8px; }
+.group legend { padding:0; margin-bottom:8px; font-weight:500; color:var(--color-text); }
+.group:disabled { opacity:.6; }
+.icons, .colors { display:grid; grid-template-columns:repeat(auto-fill, minmax(44px, 1fr)); gap:6px; }
+.option { position:relative; display:flex; align-items:center; justify-content:center; min-width:44px; min-height:44px; cursor:pointer; }
+.option input { position:absolute; inset:0; margin:0; opacity:0; cursor:inherit; }
+.iconSwatch { display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:var(--radius-md); border:2px solid transparent; background:var(--color-bg-subtle); font-size:20px; line-height:1; transition:border-color var(--transition-fast); }
+.colorSwatch { width:32px; height:32px; border-radius:var(--radius-pill); box-shadow:0 0 0 2px var(--color-surface), 0 0 0 4px transparent; transition:box-shadow var(--transition-fast); }
+.option input:checked + .iconSwatch { border-color:var(--color-primary-500); background:var(--color-primary-50); }
+.option input:checked + .colorSwatch { box-shadow:0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-text); }
+.option input:focus-visible + .iconSwatch, .option input:focus-visible + .colorSwatch { box-shadow:var(--focus-ring); }
+.option input:checked:focus-visible + .colorSwatch { box-shadow:0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-text), 0 0 0 6px var(--color-primary-500); }
+.srOnly { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }

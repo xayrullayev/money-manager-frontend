@@ -1,0 +1,72 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  width: 100%;
+  min-height: var(--control-height);
+  padding: 0 var(--space-8) 0 var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  appearance: none;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.select:focus-visible {
+  border-color: var(--focus-ring-color);
+  box-shadow: var(--focus-ring);
+  outline: none;
+}
+
+.selectError {
+  border-color: var(--color-danger);
+}
+
+.select:disabled {
+  background: var(--color-bg-subtle);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.chevron {
+  position: absolute;
+  right: var(--space-4);
+  pointer-events: none;
+  color: var(--color-text-muted);
+  font-size: 10px;
+}
+
+.hintText {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.errorText {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-danger);
+}

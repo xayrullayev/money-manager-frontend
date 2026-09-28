@@ -1,0 +1,194 @@
+/* Design-05 · Operatsiya qo'shish/tahrirlash. Konteyner (overlay, dialog/sheet, sarlavha) — shared/ui/Dialog. */
+
+/* Figma 7:26 — soft fon, 8px padding, faol tur Primary. */
+.typeTabs {
+  display: flex;
+  gap: 10px;
+  padding: var(--space-2);
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-50);
+}
+
+.typeTab {
+  flex: 1;
+  min-height: var(--touch-target-min);
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.typeTab:not(:disabled):hover {
+  color: var(--color-text);
+}
+
+.typeTabActive {
+  background: var(--color-primary-500);
+  color: var(--color-text-inverse);
+}
+
+.typeTabActive:not(:disabled):hover {
+  color: var(--color-text-inverse);
+}
+
+.typeLocked {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+}
+
+.typeLocked strong {
+  color: var(--color-text);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.amountInput {
+  min-height: 56px;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.select,
+.input,
+.textarea {
+  min-height: var(--control-height);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  min-width: 0;
+}
+
+.textarea {
+  padding: var(--space-3) var(--space-4);
+  min-height: 72px;
+  resize: vertical;
+}
+
+.amountInput:focus-visible,
+.select:focus-visible,
+.input:focus-visible,
+.textarea:focus-visible {
+  border-color: var(--focus-ring-color);
+  box-shadow: var(--focus-ring);
+  outline: none;
+}
+
+.amountInput[aria-invalid="true"],
+.select[aria-invalid="true"],
+.input[aria-invalid="true"] {
+  border: 1.5px solid var(--color-danger);
+}
+
+.fieldError {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-danger);
+}
+
+.hint {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.formError {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+}
+
+.notice {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-primary-50);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+}
+
+/* 409 STALE_VERSION / o'chirilgan operatsiya. */
+.conflict {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-warning);
+  border-radius: var(--radius-md);
+  background: var(--color-warning-bg);
+}
+
+.conflictText {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+}
+
+/* Dirty forma yopilishini tasdiqlash. */
+.actions {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.actions > * {
+  flex: 1;
+}
+
+.actions > :last-child {
+  flex: 1.4;
+}
+
+/* 320px: actions vertikal (Design-02). */
+@media (max-width: 359px) {
+  .actions {
+    flex-direction: column-reverse;
+  }
+}

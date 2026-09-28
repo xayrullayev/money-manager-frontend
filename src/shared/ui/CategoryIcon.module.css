@@ -1,0 +1,2 @@
+.icon { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:36px; height:36px; border-radius:var(--radius-pill); border:2px solid; font-size:18px; line-height:1; }
+.sm { width:28px; height:28px; font-size:14px; border-width:1.5px; }

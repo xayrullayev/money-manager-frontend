@@ -1,0 +1,121 @@
+/**
+ * Design tokens — Design-02 asosida.
+ * Rang, tipografiya, spacing, radius va breakpoint o'zgaruvchilari.
+ * Och rangli dizayn tizim mavzusidan qat’i nazar bir xil saqlanadi.
+ */
+:root {
+  color-scheme: light;
+  /*
+   * Brand rang — Figma'da rasmiy belgilangan token qiymatlari
+   * (canvas/surface/ink/muted/accent/soft/border/expense).
+   */
+  --color-primary-50: #e6f2ec;   /* soft */
+  --color-primary-100: #d3e9df;
+  --color-primary-300: #6fae97;
+  --color-primary-500: #14634d;  /* accent */
+  --color-primary-600: #0f4d3c;
+  --color-primary-700: #0a3529;
+
+  /* Figma 4:2: Background/Neutral/Tertiary, Text/Default/Default,
+   * Border/Neutral/Secondary. Hover is a neutral companion state. */
+  --color-control-subtle: #e3e3e3;
+  --color-control-subtle-hover: #d5d5d5;
+  --color-control-text: #1e1e1e;
+  --color-control-border: #767676;
+  --color-control-primary-text: #f5f5f5;
+  --color-control-primary-border: #2c2c2c;
+
+  /* --- Neytral rang (Figma: canvas/surface/ink/muted/border) --- */
+  --color-bg: #ffffff;
+  --color-bg-subtle: #f6f8f7;    /* canvas */
+  --color-surface: #ffffff;      /* surface */
+  --color-border: #dce5df;       /* border */
+  --color-border-strong: #b9c7c0;
+  --color-text: #162c26;         /* ink */
+  --color-text-muted: #586a63;   /* muted */
+  --color-text-inverse: #ffffff;
+
+  /* --- Semantik rang --- */
+  --color-success: #14634d;
+  --color-success-bg: #e6f2ec;
+  --color-danger: #a43d32;       /* expense */
+  --color-danger-bg: #f7e9e7;
+  --color-warning: #b9762a;
+  --color-warning-bg: #faf1e6;
+
+  /* --- Moliyaviy semantika: kirim/chiqim (Figma: accent / expense) --- */
+  --color-income: #14634d;
+  --color-expense: #a43d32;
+
+  /* --- Tipografiya --- */
+  --font-family-base: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --line-height-tight: 1.2;
+  --line-height-base: 1.5;
+
+  /* --- Spacing (4px grid) --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* --- Radius --- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* --- Soyalar --- */
+  --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.06);
+  --shadow-md: 0 4px 12px rgba(17, 24, 39, 0.08);
+
+  /* --- Touch/UI o'lchamlari --- */
+  --touch-target-min: 44px;
+  --control-height: 48px;
+
+  /* --- Breakpointlar (hujjat uchun; media query'da literal qiymat ishlatiladi) --- */
+  --breakpoint-mobile: 320px;
+  --breakpoint-mobile-lg: 390px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1440px;
+
+  /* --- Focus --- */
+  /* Ikki qavatli halqa: ichki oq bo'shliq + primary-500 (oq fonda ~8:1, WCAG 2.2 fokus ≥3:1).
+     Oldingi primary-100 halqa oq fonda ~1.2:1 edi — ko'rinmasdi (Frontend-01). */
+  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-primary-500);
+  --focus-ring-color: var(--color-primary-500);
+
+  /* Qatlamlar (z-index) — Design-02: nav < dropdown < dialog (50) < toast (100). */
+  --z-nav: 30;
+  --z-dropdown: 40;
+  --z-skip-link: 200;
+
+  /* --- Motion --- */
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+}
+
+/* Design-07: kategoriya rang tokenlari — backend allowlist (CategoryTokens.java) bilan 1:1.
+   Oq fonda har biri ≥3:1 (grafik element, WCAG 1.4.11); -bg — belgi foni uchun och variant. */
+:root {
+  --category-green: #2e7d4f;   --category-green-bg: #e3f1e8;
+  --category-teal: #1b7f80;    --category-teal-bg: #dff0f0;
+  --category-blue: #2d65a8;    --category-blue-bg: #e2ebf6;
+  --category-purple: #7250a8;  --category-purple-bg: #ece6f5;
+  --category-pink: #b3486f;    --category-pink-bg: #f6e4eb;
+  --category-orange: #c0621f;  --category-orange-bg: #f9e9dc;
+  --category-yellow: #a07a12;  --category-yellow-bg: #f7f0d9;
+  --category-red: #b23c32;     --category-red-bg: #f7e3e1;
+  --category-gray: #6b7370;    --category-gray-bg: #eceeed;
+  --category-brown: #85563a;   --category-brown-bg: #f1e7e0;
+}

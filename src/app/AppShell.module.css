@@ -1,0 +1,50 @@
+.shell { min-height: 100vh; display: flex; background: var(--color-bg-subtle); }
+.sidebar { display: flex; flex-direction: column; width: 240px; flex-shrink: 0; background: var(--color-surface); padding: 28px; border-radius: 0 16px 16px 0; }
+.sidebarBrand, .brand { display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 700; letter-spacing: -0.025em; white-space: nowrap; }
+.sidebarBrand { margin-bottom: 24px; }
+.diamond { display: inline-block; position: relative; width: 13px; height: 13px; border: 1.5px solid currentColor; transform: rotate(45deg); flex-shrink: 0; margin: 3px; }
+.diamond::after { content: ""; position: absolute; inset: 3px; background: currentColor; }
+.sidebarSectionLabel { font-size: 11px; line-height: 16px; color: var(--color-text-muted); text-transform: uppercase; font-weight: 600; margin-bottom: 24px; }
+.sidebarNav { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.sidebarLink { display: flex; align-items: center; min-height: 50px; padding: 14px; border-radius: 16px; color: var(--color-text-muted); text-decoration: none; font-size: 14px; font-weight: 400; }
+.sidebarLink[aria-disabled="true"] { cursor: not-allowed; }
+.sidebarLink:not([aria-disabled="true"]):hover { background: var(--color-primary-50); }
+.sidebarLinkActive { color: var(--color-primary-500); background: var(--color-primary-50); font-weight: 600; }
+.logoutArea { margin-top: auto; padding-top: 40px; }
+.logoutBtn { background: none; border: none; color: var(--color-text-muted); font-size: 13px; cursor: pointer; min-height: 44px; padding: 0 14px; }
+.logoutBtn:hover { color: var(--color-danger); }
+.main { flex: 1; min-width: 0; }
+.content { padding: 40px; max-width: 1440px; margin: 0 auto; }
+/* Fokus dasturiy ravishda (sahifa almashganda) beriladi — halqa kerak emas. */
+.content:focus { outline: none; box-shadow: none; }
+/* Skip link: faqat klaviatura fokusida ko'rinadi (Frontend-01). */
+.skipLink { position: absolute; left: 16px; top: -100px; z-index: var(--z-skip-link); padding: 12px 16px; border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-primary-500); font-weight: 600; box-shadow: var(--shadow-md); }
+.skipLink:focus { top: 16px; }
+.topbar, .bottomNav { display: none; }
+@media (min-width: 768px) and (max-width: 1100px) {
+  .sidebar { width: 208px; padding: 24px 20px; }
+  .sidebarBrand { font-size: 17px; }
+  .content { padding: 32px 24px; }
+}
+@media (max-width: 767px) {
+  .shell { display: block; }
+  .sidebar { display: none; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 20px 20px 0; }
+  .brand { font-size: 16px; gap: 8px; }
+  .diamond { width: 11px; height: 11px; }
+  .diamond::after { inset: 2px; }
+  .content { padding: 20px; }
+  /* Pastki nav doim ko'rinadi (sticky) — uzun sahifada navigatsiya uchun oxirigacha scroll kerak emas. */
+  .bottomNav { display: block; position: sticky; bottom: 0; z-index: var(--z-nav); padding: 8px 20px max(12px, env(safe-area-inset-bottom)); background: linear-gradient(to bottom, transparent, var(--color-bg-subtle) 8px); }
+  .mobileNavBar { box-shadow: var(--shadow-md); }
+  .mobileNavBar { display: flex; align-items: stretch; background: var(--color-surface); border-radius: 12px; }
+  .navItem { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 44px; color: var(--color-text-muted); text-decoration: none; font-size: 12px; list-style: none; cursor: pointer; }
+  .navItem[aria-disabled="true"] { cursor: not-allowed; }
+  .navItemActive { color: var(--color-primary-500); font-weight: 600; }
+  .moreMenu { flex: 1; position: relative; }
+  .moreMenu summary::-webkit-details-marker { display: none; }
+  .moreMenuContent { position: absolute; right: 0; bottom: calc(100% + 8px); display: grid; gap: 8px; width: 240px; padding: 16px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); box-shadow: var(--shadow-md); z-index: var(--z-dropdown); color: var(--color-text-muted); font-size: 13px; }
+  .moreLink, .moreLinkActive { display: flex; align-items: center; min-height: 44px; color: var(--color-text-muted); text-decoration: none; font-size: 14px; }
+  .moreLinkActive { color: var(--color-primary-500); font-weight: 600; }
+  .moreMenuContent .logoutBtn { text-align: left; padding: 0; }
+}
