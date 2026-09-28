@@ -11,10 +11,10 @@ import {
   ReportsIcon,
   SettingsIcon,
   SignOutIcon,
-  MenuIcon,
   CloseIcon,
   StyleGuideIcon,
 } from "./navIcons";
+import { Navbar } from "./Navbar";
 import styles from "./AppShell.module.css";
 
 type NavIcon = ComponentType<SVGProps<SVGSVGElement>>;
@@ -123,25 +123,14 @@ export function AppShell() {
       </aside>
 
       <div className={styles.main}>
-        {/* Mobil yuqori bar: brend + hamburger */}
-        <header className={styles.topbar}>
-          <span className={styles.brand}>
-            <Diamond />
-            <span className={styles.brandLabel}>Money Manager</span>
-          </span>
-          <button
-            type="button"
-            ref={menuButtonRef}
-            className={styles.menuButton}
-            aria-label="Navigatsiya menyusi"
-            aria-haspopup="dialog"
-            aria-expanded={menuOpen}
-            aria-controls={DRAWER_ID}
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            <MenuIcon className={styles.menuIcon} />
-          </button>
-        </header>
+        {/* Yuqori header (navbar): sarlavha + qidiruv + qo'ng'iroq + profil.
+            Mobil'da hamburger shu yerda — drawer'ni ochadi. */}
+        <Navbar
+          menuOpen={menuOpen}
+          onMenuToggle={() => setMenuOpen((open) => !open)}
+          menuControls={DRAWER_ID}
+          menuButtonRef={menuButtonRef}
+        />
 
         <main id={MAIN_ID} ref={mainRef} tabIndex={-1} className={styles.content}>
           <Outlet />

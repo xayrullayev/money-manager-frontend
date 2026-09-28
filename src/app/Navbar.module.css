@@ -1,0 +1,180 @@
+/**
+ * Navbar (yuqori header) — Design-Migrate. UI'ning eng tepasida, sticky.
+ * Rang/tipografiya tokenlardan (tokens.css): Green-Dark sarlavha, soft-yashil
+ * pill tugmalar, neytral qidiruv maydoni, Urbanist shrift (meros).
+ */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1440px;
+  margin: 0 auto;
+  min-height: 72px;
+  padding: 12px 40px;
+}
+
+/* --- Chap: hamburger + orqaga + sarlavha/breadcrumb --- */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0; /* sarlavha truncate bo'lishi uchun */
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-primary-500);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Breadcrumb --- */
+.crumbs { min-width: 0; }
+.crumbList { display: flex; align-items: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.crumb { display: inline-flex; align-items: center; gap: 8px; }
+.crumbLink {
+  font-size: 22px; font-weight: 700; letter-spacing: -0.02em;
+  color: var(--color-text-muted); text-decoration: none;
+}
+.crumbLink:hover { color: var(--color-text); }
+.crumbCurrent { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--color-primary-500); }
+.crumbSep { color: var(--color-text-muted); font-size: 20px; font-weight: 500; }
+.crumbChevron { color: var(--color-text-muted); }
+
+/* --- O'ng: qidiruv + qo'ng'iroq + profil --- */
+.right { display: flex; align-items: center; gap: 12px; }
+
+/* Qidiruv — neytral pill: input + lupa tugmasi */
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 320px;
+  max-width: 40vw;
+  height: 44px;
+  padding: 0 8px 0 18px;
+  background: var(--color-bg-subtle);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+.search:focus-within { border-color: var(--color-border); background: var(--color-surface); }
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--color-text);
+  outline: none;
+}
+.searchInput::placeholder { color: var(--color-text-muted); }
+/* type="search" ning brauzer standart "clear" tugmasini olib tashlaymiz. */
+.searchInput::-webkit-search-decoration,
+.searchInput::-webkit-search-cancel-button { -webkit-appearance: none; }
+.searchBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; flex-shrink: 0;
+  border: 0; background: transparent; color: var(--color-text-muted);
+  border-radius: var(--radius-pill); cursor: pointer;
+}
+.searchBtn:hover { color: var(--color-text); }
+
+/* Ikon-tugma (qidiruv-toggle, qo'ng'iroq) — soft-yashil doira */
+.iconAction {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; flex-shrink: 0;
+  border: 0; border-radius: var(--radius-pill);
+  background: var(--color-primary-50);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+.iconAction:hover { background: var(--color-primary-100); color: var(--color-primary-500); }
+
+/* Bildirishnoma nuqtasi — pastki emas, yuqori-o'ng burchak, surface halqa bilan */
+.dot {
+  position: absolute; top: 8px; right: 9px;
+  width: 9px; height: 9px;
+  background: #ef4444;
+  border: 2px solid var(--color-surface);
+  border-radius: var(--radius-pill);
+}
+
+/* Qidiruv-toggle keng ekranda yashirin (o'rniga to'liq maydon) */
+.searchToggle { display: none; }
+
+/* Hamburger va orqaga tugmasi */
+.menuBtn {
+  display: none; /* faqat mobil'da */
+  align-items: center; justify-content: center;
+  width: 44px; height: 44px; flex-shrink: 0;
+  border: 0; background: transparent; color: var(--color-text);
+  border-radius: 12px; cursor: pointer;
+}
+.menuBtn:hover { background: var(--color-primary-50); }
+.backBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; flex-shrink: 0;
+  color: var(--color-text); background: var(--color-primary-50);
+  border-radius: 12px; text-decoration: none;
+  transition: background-color var(--transition-fast);
+}
+.backBtn:hover { background: var(--color-primary-100); }
+
+/* Profil — avatar + ism */
+.profile { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.userName {
+  font-size: 15px; font-weight: 700; color: var(--color-text);
+  white-space: nowrap;
+}
+
+/* Fokus halqasi — tokens.css bilan bir xil (ikki qavatli). */
+.menuBtn:focus-visible,
+.backBtn:focus-visible,
+.iconAction:focus-visible,
+.searchBtn:focus-visible,
+.crumbLink:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.search:focus-within { box-shadow: none; }
+
+/* --- Responsiv --- */
+
+/* O'rta ekran: to'liq qidiruv maydoni o'rniga ikon-tugma */
+@media (max-width: 900px) {
+  .search { display: none; }
+  .searchToggle { display: inline-flex; }
+}
+
+/* Tablet ikon-rail bilan mos: padding kichrayadi */
+@media (min-width: 768px) and (max-width: 1100px) {
+  .inner { padding: 12px 24px; }
+}
+
+/* Mobil: hamburger ko'rinadi, sarlavha kichrayadi, ism yashirinadi */
+@media (max-width: 767px) {
+  .inner { padding: 10px 16px; min-height: 60px; gap: 8px; }
+  .menuBtn { display: inline-flex; }
+  .title { font-size: 20px; }
+  .crumbLink, .crumbCurrent { font-size: 18px; }
+  .right { gap: 6px; }
+  .userName { display: none; }
+  .iconAction { width: 40px; height: 40px; }
+}
