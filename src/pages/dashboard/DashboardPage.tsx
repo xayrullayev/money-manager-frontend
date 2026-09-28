@@ -115,71 +115,81 @@ export function DashboardPage() {
 
       {status === "ready" && summary && (
         <>
-          <section className={styles.topGrid} aria-label="Moliyaviy xulosa">
-            <div className={styles.balanceCard}>
-              <div className={styles.balanceTop}>
-                <span className={styles.balanceBrand} aria-hidden="true"><span className={styles.diamond} /></span>
-                <ContactlessIcon />
-              </div>
-              <span className={styles.balanceLabel}>Jami qoldiq</span>
-              <span className={styles.balanceValue} aria-live="polite">
-                {balanceHidden ? "•••• •••" : formatMoney(summary.totalBalance, summary.currency)}
-              </span>
-              <div className={styles.balanceFoot}>
-                <span className={styles.balanceMeta}>{summary.accountsCount} ta hisob</span>
-                <button type="button" className={styles.balanceToggle} onClick={toggleBalanceHidden} aria-pressed={balanceHidden}>
-                  {balanceHidden ? "Ko‘rsatish" : "Yashirish"}
-                </button>
-              </div>
-            </div>
-
-            <StatCard variant="income" label={`${periodLabel} daromad`} value={formatMoney(summary.income, summary.currency)} />
-            <StatCard variant="expense" label={`${periodLabel} xarajat`} value={formatMoney(summary.expense, summary.currency)} />
-            <StatCard variant="net" label="Sof oqim" value={formatMoney(summary.net, summary.currency)} />
-          </section>
-
           <Button className={styles.mobileCta} onClick={() => setDialogOpen(true)}>+ Xarajat qo‘shish</Button>
 
-          <TotalSavingsBlock summary={summary.savings} balanceHidden={balanceHidden} />
-
-          <div className={styles.mainGrid}>
-            {/* Desktopda yon ustun tepasida, mobil/planshetda asosiy ustundan (Cashflow, So‘nggi operatsiyalar) oldin (grid-area). */}
-            <DailyLimitCard className={`${styles.card} ${styles.dailyLimitCard}`} refreshKey={reloadToken} />
-            <div className={styles.mainColumn}>
-            <CashflowCard balanceHidden={balanceHidden} reloadToken={reloadToken} />
-            <section className={`${styles.card} ${styles.transactionsCard}`} aria-labelledby="transactions-title">
-              <div className={styles.cardHead}>
-                <h2 className={styles.cardTitle} id="transactions-title">So‘nggi operatsiyalar</h2>
-                <button type="button" className={styles.cardLink} onClick={() => navigate("/transactions")}>Barchasi →</button>
-              </div>
-              {summary.recentTransactions.length === 0 ? (
-                <p className={styles.emptyState}>Hali operatsiya yo‘q. Birinchi xarajatingizni qo‘shing.</p>
-              ) : (
-                <div className={styles.tableWrap}>
-                  <table className={styles.txTable}>
-                    <thead>
-                      <tr>
-                        <th scope="col">Operatsiya</th>
-                        <th scope="col">Sana</th>
-                        <th scope="col" className={styles.right}>Summa</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {summary.recentTransactions.map((tx) => (
-                        <tr key={tx.id}>
-                          <td>
-                            <span className={styles.txTitle}>{txTitle(tx)}</span>
-                            <span className={styles.txSub}>{txSubtitle(tx)}</span>
-                          </td>
-                          <td className={styles.txDate}>{formatRowDate(tx.transactionDate)}</td>
-                          <td className={`${styles.right} ${styles.txAmount} ${amountClass(tx.type)}`}>{txAmount(tx)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+          {/*
+            Uch ustunli tartib (Figma "Animated Dashboard" layouti):
+            - leftColumn:   Balans hero, Kunlik limit, Jamg‘arma rejalari
+            - mainColumn:   3 stat karta (daromad/xarajat/sof), Cashflow, So‘nggi operatsiyalar
+            - sideColumn:   Statistika (donut), Oylik budjet
+            Grid-area orqali mobil/planshetda ustunlar bitta ustunga stacklanadi.
+          */}
+          <div className={styles.dashboardGrid} aria-label="Boshqaruv paneli">
+            <div className={styles.leftColumn}>
+              <div className={styles.balanceCard}>
+                <div className={styles.balanceTop}>
+                  <span className={styles.balanceBrand} aria-hidden="true"><span className={styles.diamond} /></span>
+                  <ContactlessIcon />
                 </div>
-              )}
-            </section>
+                <span className={styles.balanceLabel}>Jami qoldiq</span>
+                <span className={styles.balanceValue} aria-live="polite">
+                  {balanceHidden ? "•••• •••" : formatMoney(summary.totalBalance, summary.currency)}
+                </span>
+                <div className={styles.balanceFoot}>
+                  <span className={styles.balanceMeta}>{summary.accountsCount} ta hisob</span>
+                  <button type="button" className={styles.balanceToggle} onClick={toggleBalanceHidden} aria-pressed={balanceHidden}>
+                    {balanceHidden ? "Ko‘rsatish" : "Yashirish"}
+                  </button>
+                </div>
+              </div>
+
+              <DailyLimitCard className={`${styles.card} ${styles.dailyLimitCard}`} refreshKey={reloadToken} />
+
+              <TotalSavingsBlock summary={summary.savings} balanceHidden={balanceHidden} />
+            </div>
+
+            <div className={styles.mainColumn}>
+              <section className={styles.statRow} aria-label="Moliyaviy xulosa">
+                <StatCard variant="income" label={`${periodLabel} daromad`} value={formatMoney(summary.income, summary.currency)} />
+                <StatCard variant="expense" label={`${periodLabel} xarajat`} value={formatMoney(summary.expense, summary.currency)} />
+                <StatCard variant="net" label="Sof oqim" value={formatMoney(summary.net, summary.currency)} />
+              </section>
+
+              <CashflowCard balanceHidden={balanceHidden} reloadToken={reloadToken} />
+
+              <section className={`${styles.card} ${styles.transactionsCard}`} aria-labelledby="transactions-title">
+                <div className={styles.cardHead}>
+                  <h2 className={styles.cardTitle} id="transactions-title">So‘nggi operatsiyalar</h2>
+                  <button type="button" className={styles.cardLink} onClick={() => navigate("/transactions")}>Barchasi →</button>
+                </div>
+                {summary.recentTransactions.length === 0 ? (
+                  <p className={styles.emptyState}>Hali operatsiya yo‘q. Birinchi xarajatingizni qo‘shing.</p>
+                ) : (
+                  <div className={styles.tableWrap}>
+                    <table className={styles.txTable}>
+                      <thead>
+                        <tr>
+                          <th scope="col">Operatsiya</th>
+                          <th scope="col">Sana</th>
+                          <th scope="col" className={styles.right}>Summa</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {summary.recentTransactions.map((tx) => (
+                          <tr key={tx.id}>
+                            <td>
+                              <span className={styles.txTitle}>{txTitle(tx)}</span>
+                              <span className={styles.txSub}>{txSubtitle(tx)}</span>
+                            </td>
+                            <td className={styles.txDate}>{formatRowDate(tx.transactionDate)}</td>
+                            <td className={`${styles.right} ${styles.txAmount} ${amountClass(tx.type)}`}>{txAmount(tx)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </section>
             </div>
 
             <div className={styles.sideColumn}>
@@ -352,8 +362,19 @@ function DashboardSkeleton() {
   return (
     <div className={styles.loadingState} aria-busy="true" role="status" aria-label="Bosh sahifa yuklanmoqda">
       <span className="sr-only">Ma’lumotlar yuklanmoqda…</span>
-      <div className={styles.topGrid}>{[0, 1, 2, 3].map((item) => <div key={item} className={`${styles.skeleton} ${styles.skeletonSummary}`} />)}</div>
-      <div className={styles.mainGrid}><div className={`${styles.skeleton} ${styles.skeletonDetail}`} /><div className={`${styles.skeleton} ${styles.skeletonDetail}`} /></div>
+      <div className={styles.dashboardGrid}>
+        <div className={styles.leftColumn}>
+          <div className={`${styles.skeleton} ${styles.skeletonSummary}`} />
+          <div className={`${styles.skeleton} ${styles.skeletonDetail}`} />
+        </div>
+        <div className={styles.mainColumn}>
+          <div className={styles.statRow}>{[0, 1, 2].map((item) => <div key={item} className={`${styles.skeleton} ${styles.skeletonSummary}`} />)}</div>
+          <div className={`${styles.skeleton} ${styles.skeletonDetail}`} />
+        </div>
+        <div className={styles.sideColumn}>
+          <div className={`${styles.skeleton} ${styles.skeletonDetail}`} />
+        </div>
+      </div>
     </div>
   );
 }
