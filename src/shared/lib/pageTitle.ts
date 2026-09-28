@@ -25,3 +25,12 @@ export function pageTitle(pathname: string): string {
   const page = TITLES[normalized];
   return page ? `${page} · ${APP_NAME}` : APP_NAME;
 }
+
+/**
+ * `pathname` → faqat sahifa yorlig'i ("Budjetlar"), ilova nomisiz.
+ * Navbar sarlavhasi uchun (`pageTitle` — brauzer tabi uchun). Noma'lum yo'lda ilova nomi.
+ */
+export function pageLabel(pathname: string): string {
+  const normalized = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+  return TITLES[normalized] ?? APP_NAME;
+}
