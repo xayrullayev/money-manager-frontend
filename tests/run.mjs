@@ -11,5 +11,10 @@ const output = mkdtempSync(join(tmpdir(), 'money-manager-tests-'));
 try {
   const build = spawnSync(process.execPath, ['node_modules/typescript/bin/tsc', ...SOURCES, '--ignoreConfig', '--outDir', output, '--module', 'commonjs', '--target', 'es2022', '--skipLibCheck'], {stdio:'inherit'});
   if (build.status !== 0) process.exitCode = build.status ?? 1;
-  else process.exitCode = spawnSync(process.execPath, ['--test', ...TESTS], {stdio:'inherit',env:{...process.env,TZ:'Asia/Tashkent',TEST_BUILD:output}}).status ?? 1;
+  else {
+    const unit = spawnSync(process.execPath, ['--test', ...TESTS], {stdio:'inherit',env:{...process.env,TZ:'Asia/Tashkent',TEST_BUILD:output}}).status ?? 1;
+    // Mock API testi ESM + TS-strip loader ishlatadi (handlers.ts/db.ts to'g'ridan-to'g'ri import).
+    const mock = spawnSync(process.execPath, ['--test', 'tests/mockApi.test.mjs'], {stdio:'inherit',env:{...process.env,TZ:'Asia/Tashkent'}}).status ?? 1;
+    process.exitCode = unit || mock;
+  }
 } finally { rmSync(output, {recursive:true,force:true}); }
