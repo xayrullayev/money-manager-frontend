@@ -135,6 +135,30 @@ test("savings: hissa qo'shish current/progress yangilaydi", async () => {
   assert.ok(plan.progressPercent >= 0 && plan.progressPercent <= 100 || plan.progressPercent > 100);
 });
 
+test("GET /transactions/:id — chek tafsiloti uchun bitta operatsiya qaytadi", async () => {
+  const txn = db.transactions[0];
+  const res = await call("GET", `/transactions/${txn.id}`, {});
+  assert.equal(res.status, 200);
+  assert.equal(res.data.id, txn.id);
+  assert.ok(isMoney(res.data.amount));
+  assert.equal(typeof res.data.version, "number");
+});
+
+test("GET /transactions/:id — noma'lum id => 404", async () => {
+  await assert.rejects(
+    () => call("GET", "/transactions/nope", {}),
+    (e) => e instanceof MockHttpError && e.status === 404 && e.code === "TRANSACTION_NOT_FOUND",
+  );
+});
+
+test("DELETE /transactions/:id — versiya mos kelmasa 409 STALE_VERSION", async () => {
+  const txn = db.transactions.find((t) => t.type !== "TRANSFER");
+  await assert.rejects(
+    () => call("DELETE", `/transactions/${txn.id}`, { query: { version: 999 } }),
+    (e) => e instanceof MockHttpError && e.status === 409,
+  );
+});
+
 test("noma'lum yo'l => 404 NOT_FOUND", async () => {
   await assert.rejects(
     () => call("GET", "/nope/nowhere", {}),

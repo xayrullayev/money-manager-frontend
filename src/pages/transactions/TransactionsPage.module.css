@@ -47,6 +47,8 @@
 .page header > button { margin-top:var(--space-4); }
 @media(min-width:1024px) { .filters { grid-template-columns:repeat(3,minmax(0,1fr)); } .table th,.table td { padding:var(--space-4); } }
 
+.detailLink { margin:0; }
+.detailLink a { color:var(--color-primary-500); font-weight:600; min-height:var(--touch-target-min); display:inline-flex; align-items:center; }
 .headerActions,.dialogActions { display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-4); }
 .dialogActions { justify-content:flex-end; }
 .dangerButton { color:var(--color-danger); background:var(--color-danger-bg); }

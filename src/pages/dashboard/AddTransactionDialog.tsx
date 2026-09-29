@@ -47,6 +47,12 @@ interface Props {
   initialType?: FormType;
   /** Berilsa — tahrirlash rejimi (Design-05). Tur o'zgarmaydi. */
   transaction?: Transaction;
+  /**
+   * Faqat YARATISH rejimida (transaction berilmaganda) formani oldindan to'ldirish uchun.
+   * Frontend-check-03: chek tafsilotidan "Xarajatga saqlash" — mavjud operatsiyadan
+   * yangi xarajat nusxasini oldindan to'ldirib ochish uchun ishlatiladi.
+   */
+  template?: Partial<FormValues>;
 }
 
 function valuesFromTransaction(tx: Transaction): FormValues {
@@ -92,7 +98,7 @@ function buildPayload(type: FormType, v: FormValues): CreateTransactionPayload {
  * - xatoda dialog ochiq qoladi va qiymatlar saqlanadi; saqlanayotganda yopish bloklanadi;
  * - o'zgartirilgan (dirty) forma yopilayotganda tasdiq so'raladi.
  */
-export function AddTransactionDialog({ onClose, onSaved, initialType = "EXPENSE", transaction }: Props) {
+export function AddTransactionDialog({ onClose, onSaved, initialType = "EXPENSE", transaction, template }: Props) {
   const isEdit = Boolean(transaction);
   const [current, setCurrent] = useState<Transaction | undefined>(transaction);
   const [type, setType] = useState<FormType>(transaction?.type ?? initialType);
@@ -106,8 +112,8 @@ export function AddTransactionDialog({ onClose, onSaved, initialType = "EXPENSE"
   const loadingOptions = optionsSettled !== optionsReload;
 
   const initialValues = useMemo(
-    () => (transaction ? valuesFromTransaction(transaction) : { ...EMPTY_VALUES, date: toLocalDate() }),
-    [transaction],
+    () => (transaction ? valuesFromTransaction(transaction) : { ...EMPTY_VALUES, date: toLocalDate(), ...template }),
+    [transaction, template],
   );
   const [values, setValues] = useState<FormValues>(initialValues);
   const [baseline, setBaseline] = useState<FormValues>(initialValues);
@@ -136,13 +142,16 @@ export function AddTransactionDialog({ onClose, onSaved, initialType = "EXPENSE"
         setAccounts(accountList);
         setCategories(categoryList);
         if (!transaction && accountList.length > 0) {
-          const defaults = {
-            accountId: accountList[0].id,
-            fromAccountId: accountList[0].id,
-            toAccountId: accountList[1]?.id ?? "",
-          };
-          setValues((prev) => ({ ...prev, ...defaults }));
-          setBaseline((prev) => ({ ...prev, ...defaults }));
+          // Oldindan to'ldirilgan (template) qiymatlar ustidan yozib yubormaymiz —
+          // faqat bo'sh maydonlarga standart hisobni qo'yamiz.
+          const withDefaults = (prev: FormValues): FormValues => ({
+            ...prev,
+            accountId: prev.accountId || accountList[0].id,
+            fromAccountId: prev.fromAccountId || accountList[0].id,
+            toAccountId: prev.toAccountId || (accountList[1]?.id ?? ""),
+          });
+          setValues(withDefaults);
+          setBaseline(withDefaults);
         }
       })
       .catch((error) => {

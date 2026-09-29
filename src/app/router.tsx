@@ -6,6 +6,7 @@ import { OtpVerifyScreen } from "../pages/auth/OtpVerifyScreen";
 import { OnboardingScreen } from "../pages/onboarding/OnboardingScreen";
 import { DashboardPage } from "../pages/dashboard/DashboardPage";
 import { TransactionsPage } from "../pages/transactions/TransactionsPage";
+import { TransactionDetailPage } from "../pages/transactions/TransactionDetailPage";
 import { ReportsPage } from "../pages/reports/ReportsPage";
 import { SettingsPage } from "../pages/settings/SettingsPage";
 import { BudgetsPage } from "../pages/budgets/BudgetsPage";
@@ -62,6 +63,7 @@ export const router = createBrowserRouter([
         children: [
           { path: "/", element: <DashboardPage /> },
           { path: "/transactions", element: <TransactionsPage /> },
+          { path: "/transactions/:id", element: <TransactionDetailPage /> },
           { path: "/accounts", element: <AccountsPage /> },
           { path: "/budgets", element: <BudgetsPage /> },
           { path: "/savings", lazy: async () => ({ Component: (await import("../pages/savings/SavingPlansPage")).SavingPlansPage }) },
