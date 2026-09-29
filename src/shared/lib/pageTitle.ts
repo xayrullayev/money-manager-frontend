@@ -10,6 +10,8 @@ const TITLES: Record<string, string> = {
   "/accounts": "Hisoblar",
   "/budgets": "Budjetlar",
   "/savings": "Jamg‘arma rejalari",
+  "/checks": "Cheklar",
+  "/design/checks": "Cheklar dizayni",
   "/reports": "Hisobotlar",
   "/settings": "Sozlamalar",
   "/login": "Kirish",

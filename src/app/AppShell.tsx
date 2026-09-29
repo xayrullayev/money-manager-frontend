@@ -32,6 +32,7 @@ const NAV_ITEMS: NavItem[] = [
   { to: "/accounts", label: "Hisoblar", icon: AccountsIcon },
   { to: "/budgets", label: "Budjetlar", icon: BudgetsIcon },
   { to: "/savings", label: "Jamg‘arma", icon: SavingsIcon },
+  { to: "/checks", label: "Cheklar", icon: ReportsIcon },
   { to: "/reports", label: "Hisobotlar", icon: ReportsIcon },
   { to: "/settings", label: "Sozlamalar", icon: SettingsIcon },
   // Dizayn tizimi ma'lumotnomasi (Design-Migrate). Route AppShell'dan tashqarida — jonli style guide.
