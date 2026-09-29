@@ -13,9 +13,19 @@ const TESTS = ['tests/savingsUi.test.cjs', 'tests/savingsApi.test.cjs', 'tests/s
 const output = mkdtempSync(join(tmpdir(), 'money-manager-tests-'));
 try {
   const build = spawnSync(process.execPath, ['node_modules/typescript/bin/tsc', ...SOURCES, '--ignoreConfig', '--outDir', output, '--module', 'commonjs', '--target', 'es2022', '--skipLibCheck'], {stdio:'inherit'});
+// <<<<<<< claude/loving-archimedes-moguon
   const buildChecks = build.status === 0
     ? spawnSync(process.execPath, ['node_modules/typescript/bin/tsc', ...CHECK_SOURCES, '--ignoreConfig', '--rootDir', 'src/pages/checks/import', '--outDir', output, '--module', 'commonjs', '--target', 'es2022', '--lib', 'es2022,dom', '--skipLibCheck'], {stdio:'inherit'})
     : build;
   if (buildChecks.status !== 0) process.exitCode = buildChecks.status ?? 1;
   else process.exitCode = spawnSync(process.execPath, ['--test', ...TESTS], {stdio:'inherit',env:{...process.env,TZ:'Asia/Tashkent',TEST_BUILD:output}}).status ?? 1;
+// =======
+//   if (build.status !== 0) process.exitCode = build.status ?? 1;
+//   else {
+//     const unit = spawnSync(process.execPath, ['--test', ...TESTS], {stdio:'inherit',env:{...process.env,TZ:'Asia/Tashkent',TEST_BUILD:output}}).status ?? 1;
+//     // Mock API testi ESM + TS-strip loader ishlatadi (handlers.ts/db.ts to'g'ridan-to'g'ri import).
+//     const mock = spawnSync(process.execPath, ['--test', 'tests/mockApi.test.mjs'], {stdio:'inherit',env:{...process.env,TZ:'Asia/Tashkent'}}).status ?? 1;
+//     process.exitCode = unit || mock;
+//   }
+// >>>>>>> master
 } finally { rmSync(output, {recursive:true,force:true}); }
