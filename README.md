@@ -45,6 +45,7 @@ src/
 - **Design-AUTH-01** — telefon raqami kiritish ekrani (mask, +998 country code, validatsiya holatlari, numeric keypad, dark mode).
 - **Design-AUTH-02** — 6 xonali OTP ekrani (auto-focus, paste, autofill, auto-submit, countdown, shake xato animatsiyasi).
 - **Design-04** — Dashboard: haqiqiy Figma skrinshotiga (desktop, Bosh sahifa) moslab qurildi — sarlavha+CTA, davr filtri (joriy oy nomi bilan, masalan "Sentabr 2026"), 3 ta teng xulosa kartasi (Jami qoldiq/Daromad/Xarajat), alohida "Qoldiqni yashirish" tugmasi, ikki ustunli grid (So'nggi operatsiyalar — sana bo'yicha guruhlangan + Oylik budjet — umumiy progress va kategoriya ro'yxati), footer izohi, loading/empty/error holatlari. Rang tokenlari (--color-primary-*, --color-income) Figma dizayniga mos quyuq yashil/teal aksentga o'zgartirildi (avval ko'k edi).
+- **Frontend-check-01** — API client turlari tekshirildi va butun `/api/v1` kontrakti uchun brauzer ichidagi mock javob qatlami qo'shildi (`src/shared/api/mock/`, `VITE_API_MOCK`); real backendsiz UI/QA. Batafsil pastdagi "Mock API" bo'limida.
 - **Design-05** (qisman) — Operatsiya qo'shish dialogi: Xarajat/Daromad/O'tkazma tab, desktop dialog/mobile sheet (bitta responsive komponent), amount>0 validatsiyasi, category faqat mos type, bitta hisobga transfer taqiqlangan, dublyaj submit bloklanadi, saving/success/error holatlari. Tahrirlash/o'chirish dialoglari hali yo'q.
 
 ## App shell (Frontend-01)
@@ -93,6 +94,39 @@ eslatmasi). Backend tayyor bo'lgach shu fayllardagi yo'l/javob shakllari moslash
 UI/state logikasi asosan o'zgarishsiz qoladi. Hozircha real backend bo'lmagani sabab
 Dashboard/dialog ekranlarini ko'rish uchun `/api/v1` mock server yoki backendni ishga
 tushirish kerak (`.env.local`dagi `VITE_API_BASE_URL`).
+
+## Mock API (Frontend-check-01)
+
+Real backend hali tayyor emas (yuqoridagi "Backend contract holati"). Shu sabab
+`src/shared/api/mock/` da butun `/api/v1` kontraktining brauzer ichidagi in-memory
+mock implementatsiyasi bor — real backendsiz Dashboard/dialog/hisobot/jamg'arma
+ekranlarini ko'rish va QA qilish uchun.
+
+Yoqish:
+
+```bash
+echo "VITE_API_MOCK=1" >> .env.local   # yoki .env.example'dagi qiymatni 1 qiling
+npm run dev
+```
+
+- Mock rejimda `apiClient` adapteri `main.tsx` da render'dan oldin almashtiriladi —
+  hech qanday tarmoq so'rovi ketmaydi, `console`da bir marta ogohlantirish chiqadi.
+- **OTP kod har doim `111111`.** Demo telefon `+998901234567` — onboarding tugagan
+  (to'g'ridan-to'g'ri Dashboardga), boshqa raqamlar — yangi foydalanuvchi (onboarding).
+- Ma'lumotlar sahifa ochilganda seed qilinadi va sahifa yopilguncha saqlanadi;
+  create/update/delete mutatsiyalari holatga yoziladi (balans, budjet foizi,
+  jamg'arma progressi qayta hisoblanadi), shuning uchun UI real backenddagidek javob beradi.
+- Xatolar Bakend-13 "Problem Details" shaklida qaytadi (`400`, `404`,
+  `409 STALE_VERSION`, `401`), idempotency-key retry bir xil natija beradi (Bakend-10),
+  CSV eksport `text/csv` Blob qaytaradi.
+- **Turlar tekshiruvi:** mock javoblari `src/shared/api/*.ts` kontrakt interfeyslariga
+  bog'langan, shuning uchun `tsc` mock data'ni kontraktga qarab tekshiradi.
+- **Testlar:** `tests/mockApi.test.mjs` (11 test) `dispatch`ni to'g'ridan-to'g'ri
+  (axios/brauzersiz) sinaydi — seed, balans ta'siri, idempotency, versiya konflikti,
+  dashboard kontrakti, auth, daily-limit, savings, 404. `npm test` bilan ishga tushadi.
+
+Ishlab chiqarish (mock o'chirilgan, standart) buildida bu qatlam no-op — real backend
+`VITE_API_BASE_URL` orqali ishlatiladi.
 
 ## Keyingi qadamlar
 
