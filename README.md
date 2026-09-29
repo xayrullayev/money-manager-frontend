@@ -46,6 +46,7 @@ src/
 - **Design-AUTH-02** — 6 xonali OTP ekrani (auto-focus, paste, autofill, auto-submit, countdown, shake xato animatsiyasi).
 - **Design-04** — Dashboard: haqiqiy Figma skrinshotiga (desktop, Bosh sahifa) moslab qurildi — sarlavha+CTA, davr filtri (joriy oy nomi bilan, masalan "Sentabr 2026"), 3 ta teng xulosa kartasi (Jami qoldiq/Daromad/Xarajat), alohida "Qoldiqni yashirish" tugmasi, ikki ustunli grid (So'nggi operatsiyalar — sana bo'yicha guruhlangan + Oylik budjet — umumiy progress va kategoriya ro'yxati), footer izohi, loading/empty/error holatlari. Rang tokenlari (--color-primary-*, --color-income) Figma dizayniga mos quyuq yashil/teal aksentga o'zgartirildi (avval ko'k edi).
 - **Frontend-check-01** — API client turlari tekshirildi va butun `/api/v1` kontrakti uchun brauzer ichidagi mock javob qatlami qo'shildi (`src/shared/api/mock/`, `VITE_API_MOCK`); real backendsiz UI/QA. Batafsil pastdagi "Mock API" bo'limida.
+- **Frontend-check-05** — check ekranlari ulandi va to'liq oqim (end-to-end) QA bajarildi: butun foydalanuvchi sayohati mock API orqali avtomatlashtirilgan test bilan qamrab olindi (`tests/mockFlow.integration.mjs`). Batafsil pastdagi "To'liq oqim QA" bo'limida.
 - **Frontend-check-03** — Chek (operatsiya) tafsiloti ekrani: `/transactions/:id` — bitta operatsiyani chek ko'rinishida to'liq ko'rsatadi (tur, summa, sana, hisob(lar), kategoriya, valyuta, izoh, ID), Tahrirlash / O'chirish / "Xarajatga saqlash" (nusxa) amallari bilan. Batafsil pastdagi "Chek tafsiloti" bo'limida.
 - **Design-05** (qisman) — Operatsiya qo'shish dialogi: Xarajat/Daromad/O'tkazma tab, desktop dialog/mobile sheet (bitta responsive komponent), amount>0 validatsiyasi, category faqat mos type, bitta hisobga transfer taqiqlangan, dublyaj submit bloklanadi, saving/success/error holatlari. Tahrirlash/o'chirish dialoglari hali yo'q.
 
@@ -150,6 +151,35 @@ ko‘rinishi →" havolasi orqali ochiladi (`getTransaction` bilan id bo'yicha y
 - **Holatlar:** loading skeleti, topilmadi (404), xato + qayta urinish, orqaga havola.
 - Mock rejimda ham to'liq ishlaydi (`GET/PATCH/DELETE /transactions/:id`).
   Tekshiruv: `tests/mockApi.test.mjs` da id bo'yicha olish, 404 va versiya konflikti testlari.
+
+## To'liq oqim QA (Frontend-check-05)
+
+check ekranlari (check-01 mock API, check-03 chek tafsiloti) ilovaga ulandi va
+butun foydalanuvchi oqimi uchidan-uchiga tekshirildi.
+
+**Ulanish holati:**
+- Navigatsiya: barcha sahifalar AppShell sidebar/bottom nav'da (`app/AppShell.tsx` — Bosh
+  sahifa, Operatsiyalar, Hisoblar, Budjetlar, Jamg‘arma, Hisobotlar, Sozlamalar).
+- Chek tafsiloti: `/transactions/:id` route'i ulangan; ro'yxat tafsilot oynasidan
+  "To‘liq chek ko‘rinishi →" havolasi orqali ochiladi.
+- Mock rejim: `VITE_API_MOCK=1` — `main.tsx` render'dan oldin `installMockApi()`
+  chaqiradi, butun `/api/v1` mock adapterga o'tadi (yuqoridagi "Mock API").
+
+**Avtomatlashtirilgan to'liq oqim testi** (`tests/mockFlow.integration.mjs`,
+`npm test` bilan ishga tushadi): haqiqiy `src/shared/api/*` modullari mock adapterga
+ulanadi (backendsiz) va quyidagi sayohat 13 bosqichda tekshiriladi —
+auth (OTP `111111`) → onboarding → hisob/kategoriya yaratish → operatsiya
+yaratish (idempotency retry, balansga ta'sir) → chek tafsiloti (`getTransaction`) →
+tahrirlash (`expectedVersion`, keyin 409 STALE_VERSION) → "xarajatga saqlash" nusxasi →
+dashboard xulosa/cashflow → budjet → jamg'arma (reja + hissa) → kunlik limit
+(yaratish/o'qish/o'chirish) → hisobot summary/kategoriya/trend + CSV eksport →
+logout va keyin himoyalangan chaqiruvda 401.
+
+**Qo'lda QA (mock rejimda) ko'rsatmasi:** `VITE_API_MOCK=1 npm run dev` → `+998901234567`
+(kod `111111`) bilan kirsangiz to'g'ridan-to'g'ri Dashboard; boshqa raqam bilan
+onboarding oqimi. So'ng har bir nav sahifasi, operatsiya qo'shish/tahrirlash/o'chirish,
+chek tafsiloti va "xarajatga saqlash" nusxasi jonli ko'riladi. Bu real backend yoki
+haqiqiy telefon sinovi o'rnini bosmaydi.
 
 ## Keyingi qadamlar
 
