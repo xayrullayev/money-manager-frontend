@@ -46,6 +46,7 @@ src/
 - **Design-AUTH-02** — 6 xonali OTP ekrani (auto-focus, paste, autofill, auto-submit, countdown, shake xato animatsiyasi).
 - **Design-04** — Dashboard: haqiqiy Figma skrinshotiga (desktop, Bosh sahifa) moslab qurildi — sarlavha+CTA, davr filtri (joriy oy nomi bilan, masalan "Sentabr 2026"), 3 ta teng xulosa kartasi (Jami qoldiq/Daromad/Xarajat), alohida "Qoldiqni yashirish" tugmasi, ikki ustunli grid (So'nggi operatsiyalar — sana bo'yicha guruhlangan + Oylik budjet — umumiy progress va kategoriya ro'yxati), footer izohi, loading/empty/error holatlari. Rang tokenlari (--color-primary-*, --color-income) Figma dizayniga mos quyuq yashil/teal aksentga o'zgartirildi (avval ko'k edi).
 - **Frontend-check-01** — API client turlari tekshirildi va butun `/api/v1` kontrakti uchun brauzer ichidagi mock javob qatlami qo'shildi (`src/shared/api/mock/`, `VITE_API_MOCK`); real backendsiz UI/QA. Batafsil pastdagi "Mock API" bo'limida.
+- **Frontend-check-03** — Chek (operatsiya) tafsiloti ekrani: `/transactions/:id` — bitta operatsiyani chek ko'rinishida to'liq ko'rsatadi (tur, summa, sana, hisob(lar), kategoriya, valyuta, izoh, ID), Tahrirlash / O'chirish / "Xarajatga saqlash" (nusxa) amallari bilan. Batafsil pastdagi "Chek tafsiloti" bo'limida.
 - **Design-05** (qisman) — Operatsiya qo'shish dialogi: Xarajat/Daromad/O'tkazma tab, desktop dialog/mobile sheet (bitta responsive komponent), amount>0 validatsiyasi, category faqat mos type, bitta hisobga transfer taqiqlangan, dublyaj submit bloklanadi, saving/success/error holatlari. Tahrirlash/o'chirish dialoglari hali yo'q.
 
 ## App shell (Frontend-01)
@@ -127,6 +128,28 @@ npm run dev
 
 Ishlab chiqarish (mock o'chirilgan, standart) buildida bu qatlam no-op — real backend
 `VITE_API_BASE_URL` orqali ishlatiladi.
+
+## Chek tafsiloti (Frontend-check-03)
+
+`/transactions/:id` — bitta operatsiyaning **chek (kvitansiya) ko'rinishidagi to'liq
+tafsilot ekrani**. Operatsiyalar ro'yxatidagi tafsilot oynasidan "To‘liq chek
+ko‘rinishi →" havolasi orqali ochiladi (`getTransaction` bilan id bo'yicha yuklanadi).
+
+- **Ko'rinish:** tur belgisi (rang bilan), sarlavha (kategoriya / "Hisoblararo
+  o‘tkazma"), katta belgi bilan summa, tishli ajratgich, va qatorlar — sana,
+  hisob yoki qayerdan→qayerga (transfer), kategoriya, valyuta, izoh, operatsiya ID.
+- **Amallar:**
+  - **Tahrirlash** — mavjud `AddTransactionDialog` (tur o'zgarmaydi, `expectedVersion`,
+    409 STALE_VERSION jim overwrite qilinmaydi); saqlangach ekran yangilanadi.
+  - **O‘chirish** — `DeleteTransactionDialog` tasdig'i, so'ng ro'yxatga qaytadi
+    (`version` mos kelmasa 409 xato toast bilan ko'rsatiladi).
+  - **Xarajatga saqlash** — shu operatsiyadan **yangi xarajat nusxasini** oldindan
+    to'ldirib ochadi (summa/sana/izoh, xarajat bo'lsa hisob/kategoriya ham);
+    saqlangach yangi operatsiyaning chek ekraniga o'tadi. Asl operatsiya o'zgarmaydi.
+    Buning uchun `AddTransactionDialog`ga `template` propi qo'shildi (faqat yaratish rejimida).
+- **Holatlar:** loading skeleti, topilmadi (404), xato + qayta urinish, orqaga havola.
+- Mock rejimda ham to'liq ishlaydi (`GET/PATCH/DELETE /transactions/:id`).
+  Tekshiruv: `tests/mockApi.test.mjs` da id bo'yicha olish, 404 va versiya konflikti testlari.
 
 ## Keyingi qadamlar
 

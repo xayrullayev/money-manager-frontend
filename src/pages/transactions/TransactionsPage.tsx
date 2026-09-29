@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { deleteTransaction, listTransactions, type Transaction } from "../../shared/api/transactions";
 import { reportSummary, type ReportSummaryParams, type Summary } from "../../shared/api/reports";
 import { listAccounts, type Account } from "../../shared/api/accounts";
@@ -201,7 +201,7 @@ export function TransactionsPage() {
       {moreError && <p role="alert">{moreError}</p>}
       {cursor && <Button variant="secondary" loading={loadingMore} onClick={() => void loadMore()}>{moreError ? "Qayta urinish" : "Yana yuklash"}</Button>}
     </>}
-    {selected && <Dialog title="Operatsiya tafsilotlari" onClose={() => setSelected(null)}><dl className={styles.details}><dt>Tur</dt><dd>{TYPES[selected.type]}</dd><dt>Summa</dt><dd className={styles[selected.type]}>{displayAmount(selected)}</dd><dt>Sana</dt><dd>{dateLabel(selected.transactionDate)}</dd><dt>Hisob</dt><dd>{accountLabel(selected)}</dd>{selected.categoryName && <><dt>Kategoriya</dt><dd>{selected.categoryName}</dd></>}<dt>Izoh</dt><dd>{selected.note || "Izoh kiritilmagan"}</dd></dl><div className={styles.dialogActions}><Button disabled={pendingIds.has(selected.id)} onClick={() => { setForm({ transaction: selected }); setSelected(null); }}>Tahrirlash</Button><Button variant="secondary" className={styles.dangerButton} disabled={pendingIds.has(selected.id)} onClick={() => { setDeleting(selected); setSelected(null); }}>O‘chirish</Button></div></Dialog>}
+    {selected && <Dialog title="Operatsiya tafsilotlari" onClose={() => setSelected(null)}><dl className={styles.details}><dt>Tur</dt><dd>{TYPES[selected.type]}</dd><dt>Summa</dt><dd className={styles[selected.type]}>{displayAmount(selected)}</dd><dt>Sana</dt><dd>{dateLabel(selected.transactionDate)}</dd><dt>Hisob</dt><dd>{accountLabel(selected)}</dd>{selected.categoryName && <><dt>Kategoriya</dt><dd>{selected.categoryName}</dd></>}<dt>Izoh</dt><dd>{selected.note || "Izoh kiritilmagan"}</dd></dl><p className={styles.detailLink}><Link to={`/transactions/${selected.id}`}>To‘liq chek ko‘rinishi →</Link></p><div className={styles.dialogActions}><Button disabled={pendingIds.has(selected.id)} onClick={() => { setForm({ transaction: selected }); setSelected(null); }}>Tahrirlash</Button><Button variant="secondary" className={styles.dangerButton} disabled={pendingIds.has(selected.id)} onClick={() => { setDeleting(selected); setSelected(null); }}>O‘chirish</Button></div></Dialog>}
     {form && <AddTransactionDialog transaction={form.transaction} onClose={() => setForm(null)} onSaved={saved} />}
     {deleting && <DeleteTransactionDialog transaction={deleting} hidden={hidden} onCancel={() => setDeleting(null)} onConfirm={confirmDelete} />}
   </div>;
