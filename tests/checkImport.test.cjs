@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const s = require(process.env.TEST_BUILD + '/importSource.js');
+const s = require(process.env.TEST_BUILD + '/import/importSource.js');
 
 test('bo\'sh va noto\'g\'ri havola rad etiladi', () => {
   assert.equal(s.parseCheckSource('').ok, false);
