@@ -26,11 +26,11 @@ export function CheckHistoryScreen({ onSelectCheck, historyOptions }: CheckHisto
   const { phase, items, hasMore, loadingMore, total, loadMore, reload } = useCheckHistory(historyOptions ?? {});
 
   return (
-    <div className={styles.screen} aria-labelledby="check-history-title">
+    <main className={styles.screen} aria-labelledby="check-history-title">
       <header className={styles.header}>
-        <h2 id="check-history-title" className={styles.title}>
+        <h1 id="check-history-title" className={styles.title}>
           Cheklar tarixi
-        </h2>
+        </h1>
         {phase === "ready" && total > 0 && (
           <p className={styles.subtitle}>{total} ta import qilingan chek</p>
         )}
@@ -81,7 +81,7 @@ export function CheckHistoryScreen({ onSelectCheck, historyOptions }: CheckHisto
           )}
         </>
       )}
-    </div>
+    </main>
   );
 }
 

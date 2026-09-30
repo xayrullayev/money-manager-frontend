@@ -17,13 +17,6 @@ import { ColorPage } from "../pages/styleguide/ColorPage";
 import { TypographyPage } from "../pages/styleguide/TypographyPage";
 import { ElementPage } from "../pages/styleguide/ElementPage";
 import { ComponentPage } from "../pages/styleguide/ComponentPage";
-import {
-  ChecksLayout,
-  ChecksHistoryPage,
-  ChecksAnalyticsPage,
-  ChecksImportPage,
-  ChecksDetailPage,
-} from "../pages/checks/routes";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { AppShell } from "./AppShell";
 import { RouteErrorPage } from "./RouteErrorPage";
@@ -74,16 +67,7 @@ export const router = createBrowserRouter([
           { path: "/accounts", element: <AccountsPage /> },
           { path: "/budgets", element: <BudgetsPage /> },
           { path: "/savings", lazy: async () => ({ Component: (await import("../pages/savings/SavingPlansPage")).SavingPlansPage }) },
-          { path: "/checks/import", element: <ChecksImportPage /> },
-          {
-            path: "/checks",
-            element: <ChecksLayout />,
-            children: [
-              { index: true, element: <ChecksHistoryPage /> },
-              { path: "analytics", element: <ChecksAnalyticsPage /> },
-            ],
-          },
-          { path: "/checks/:id", element: <ChecksDetailPage /> },
+          { path: "/checks", element: <Suspense fallback={<p role="status">Yuklanmoqda…</p>}><ChecksDesignPage /></Suspense> },
           { path: "/reports", element: <ReportsPage /> },
           { path: "/settings", element: <SettingsPage /> },
         ],
