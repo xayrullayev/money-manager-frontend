@@ -11,6 +11,8 @@ const TITLES: Record<string, string> = {
   "/budgets": "Budjetlar",
   "/savings": "Jamg‘arma rejalari",
   "/checks": "Cheklar",
+  "/checks/import": "Chek qo‘shish",
+  "/checks/analytics": "Xaridlar tahlili",
   "/design/checks": "Cheklar dizayni",
   "/reports": "Hisobotlar",
   "/settings": "Sozlamalar",
@@ -21,10 +23,17 @@ const TITLES: Record<string, string> = {
   "/onboarding": "Boshlang‘ich sozlash",
 };
 
+/** Aniq mos kelmagan yo'llar uchun namunaviy (dinamik) yorliqlar. */
+function dynamicLabel(normalized: string): string | undefined {
+  // /checks/<id> — chek tafsiloti (import/analytics TITLES'da aniq mos keladi).
+  if (/^\/checks\/[^/]+$/.test(normalized)) return "Chek tafsiloti";
+  return undefined;
+}
+
 /** `pathname` → "Budjetlar · Money Manager". Noma'lum yo'l — faqat ilova nomi. */
 export function pageTitle(pathname: string): string {
   const normalized = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
-  const page = TITLES[normalized];
+  const page = TITLES[normalized] ?? dynamicLabel(normalized);
   return page ? `${page} · ${APP_NAME}` : APP_NAME;
 }
 
@@ -34,5 +43,5 @@ export function pageTitle(pathname: string): string {
  */
 export function pageLabel(pathname: string): string {
   const normalized = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
-  return TITLES[normalized] ?? APP_NAME;
+  return TITLES[normalized] ?? dynamicLabel(normalized) ?? APP_NAME;
 }

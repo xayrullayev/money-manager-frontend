@@ -23,11 +23,11 @@ export function CheckAnalyticsScreen({ analyticsOptions }: CheckAnalyticsScreenP
   const isEmpty = phase === "ready" && analytics != null && analytics.purchaseCount === 0;
 
   return (
-    <main className={styles.screen} aria-labelledby="check-analytics-title">
+    <div className={styles.screen} aria-labelledby="check-analytics-title">
       <header className={styles.header}>
-        <h1 id="check-analytics-title" className={styles.title}>
+        <h2 id="check-analytics-title" className={styles.title}>
           Xarid reytingi
-        </h1>
+        </h2>
         <p className={styles.coverage}>Faqat import qilingan cheklar bo'yicha hisoblanadi.</p>
       </header>
 
@@ -125,7 +125,7 @@ export function CheckAnalyticsScreen({ analyticsOptions }: CheckAnalyticsScreenP
           </section>
         </>
       )}
-    </main>
+    </div>
   );
 }
 

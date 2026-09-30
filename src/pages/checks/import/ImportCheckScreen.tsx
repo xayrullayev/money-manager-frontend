@@ -57,7 +57,7 @@ export function ImportCheckScreen({ onImported, onCancel, importOptions }: Impor
   };
 
   return (
-    <main className={styles.screen} aria-labelledby="import-check-title">
+    <div className={styles.screen} aria-labelledby="import-check-title">
       <header className={styles.header}>
         <h1 id="import-check-title" className={styles.title}>
           Chek import qilish
@@ -190,6 +190,6 @@ export function ImportCheckScreen({ onImported, onCancel, importOptions }: Impor
           </Button>
         </div>
       )}
-    </main>
+    </div>
   );
 }
