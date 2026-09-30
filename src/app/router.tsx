@@ -1,15 +1,5 @@
 import { lazy, Suspense } from "react";
-const checksModule = () => import("../pages/checks-design/ChecksDesignPage");
-const ChecksDesignPage = lazy(() => checksModule().then(m => ({ default: m.ChecksDesignPage })));
-const ChecksHistoryView = lazy(() => checksModule().then(m => ({ default: m.ChecksHistoryView })));
-const ChecksAnalyticsView = lazy(() => checksModule().then(m => ({ default: m.ChecksAnalyticsView })));
-const ChecksDetailView = lazy(() => checksModule().then(m => ({ default: m.ChecksDetailView })));
-/** Cheklar bo'limi: ro'yxat, tahlil va tafsilot — har biri alohida URL. */
-const checksChildren = [
-  { index: true, element: <ChecksHistoryView /> },
-  { path: "analytics", element: <ChecksAnalyticsView /> },
-  { path: ":id", element: <ChecksDetailView /> },
-];
+const ChecksDesignPage = lazy(() => import("../pages/checks-design/ChecksDesignPage").then(m => ({ default: m.ChecksDesignPage })));
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { PhoneEntryScreen } from "../pages/auth/PhoneEntryScreen";
 import { OtpVerifyScreen } from "../pages/auth/OtpVerifyScreen";
@@ -51,7 +41,7 @@ export const router = createBrowserRouter([
       { path: "/register/verify", element: <OtpVerifyScreen mode="register" /> },
       { path: "/login", element: <PhoneEntryScreen mode="login" /> },
       { path: "/login/verify", element: <OtpVerifyScreen mode="login" /> },
-      { path: "/design/checks", element: <Suspense fallback={<p role="status">Yuklanmoqda…</p>}><ChecksDesignPage preview /></Suspense>, children: checksChildren },
+      { path: "/design/checks", element: <Suspense fallback={<p role="status">Yuklanmoqda…</p>}><ChecksDesignPage preview /></Suspense> },
       { path: "/onboarding", element: <OnboardingScreen /> },
       {
         // Style & Component — jonli style guide. AppShell/auth'dan tashqarida,
@@ -77,7 +67,7 @@ export const router = createBrowserRouter([
           { path: "/accounts", element: <AccountsPage /> },
           { path: "/budgets", element: <BudgetsPage /> },
           { path: "/savings", lazy: async () => ({ Component: (await import("../pages/savings/SavingPlansPage")).SavingPlansPage }) },
-          { path: "/checks", element: <Suspense fallback={<p role="status">Yuklanmoqda…</p>}><ChecksDesignPage /></Suspense>, children: checksChildren },
+          { path: "/checks", element: <Suspense fallback={<p role="status">Yuklanmoqda…</p>}><ChecksDesignPage /></Suspense> },
           { path: "/reports", element: <ReportsPage /> },
           { path: "/settings", element: <SettingsPage /> },
         ],
